@@ -14,7 +14,12 @@ enum SizeRef{
 class SizeHelper{
     
     static func scale(from parent: CGSize, edge reference: SizeRef, scale factor: CGFloat) -> CGSize {
-        return CGSize(width: parent.width * factor, height: parent.height * factor)
+        
+        let height = reference == SizeRef.height
+        ? parent.height * factor
+            : parent.width / parent.height * factor * parent.width
+        
+        return CGSize(width: parent.width * factor, height: height)
     }
     
 }
