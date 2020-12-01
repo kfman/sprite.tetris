@@ -16,6 +16,10 @@
 		24CCC2902576A6C2001A0415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24CCC28F2576A6C2001A0415 /* Assets.xcassets */; };
 		24CCC29B2576A6C2001A0415 /* tetrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC29A2576A6C2001A0415 /* tetrisTests.swift */; };
 		24CCC2A62576A6C2001A0415 /* tetrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC2A52576A6C2001A0415 /* tetrisUITests.swift */; };
+		24CCC2B92576A8A3001A0415 /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC2B82576A8A3001A0415 /* Tetromino.swift */; };
+		24CCC2BF2576AAB2001A0415 /* SKSpriteNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC2BE2576AAB2001A0415 /* SKSpriteNode+Extension.swift */; };
+		24CCC2C42576ACBB001A0415 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC2C32576ACBB001A0415 /* Board.swift */; };
+		24CCC2C92576BC56001A0415 /* SizeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC2C82576BC56001A0415 /* SizeHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		24CCC2A12576A6C2001A0415 /* tetrisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tetrisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CCC2A52576A6C2001A0415 /* tetrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tetrisUITests.swift; sourceTree = "<group>"; };
 		24CCC2A72576A6C2001A0415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24CCC2B82576A8A3001A0415 /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
+		24CCC2BE2576AAB2001A0415 /* SKSpriteNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+Extension.swift"; sourceTree = "<group>"; };
+		24CCC2C32576ACBB001A0415 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		24CCC2C82576BC56001A0415 /* SizeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,9 @@
 		24CCC2812576A6BF001A0415 /* tetris */ = {
 			isa = PBXGroup;
 			children = (
+				24CCC2BD2576AA16001A0415 /* Helper */,
+				24CCC2B72576A85D001A0415 /* Models */,
+				24CCC2B62576A848001A0415 /* Scenes */,
 				24CCC2822576A6BF001A0415 /* AppDelegate.swift */,
 				24CCC2842576A6BF001A0415 /* GameScene.sks */,
 				24CCC2862576A6BF001A0415 /* Actions.sks */,
@@ -129,6 +140,31 @@
 				24CCC2A72576A6C2001A0415 /* Info.plist */,
 			);
 			path = tetrisUITests;
+			sourceTree = "<group>";
+		};
+		24CCC2B62576A848001A0415 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		24CCC2B72576A85D001A0415 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				24CCC2B82576A8A3001A0415 /* Tetromino.swift */,
+				24CCC2C32576ACBB001A0415 /* Board.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		24CCC2BD2576AA16001A0415 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				24CCC2BE2576AAB2001A0415 /* SKSpriteNode+Extension.swift */,
+				24CCC2C82576BC56001A0415 /* SizeHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,8 +299,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				24CCC2892576A6BF001A0415 /* GameScene.swift in Sources */,
+				24CCC2C92576BC56001A0415 /* SizeHelper.swift in Sources */,
 				24CCC28B2576A6BF001A0415 /* GameViewController.swift in Sources */,
+				24CCC2C42576ACBB001A0415 /* Board.swift in Sources */,
 				24CCC2832576A6BF001A0415 /* AppDelegate.swift in Sources */,
+				24CCC2B92576A8A3001A0415 /* Tetromino.swift in Sources */,
+				24CCC2BF2576AAB2001A0415 /* SKSpriteNode+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
