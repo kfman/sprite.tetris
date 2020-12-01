@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		24B47DDD2576C9EE00F706E0 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 24B47DDC2576C9EE00F706E0 /* readme.md */; };
+		24B47DE22576E21F00F706E0 /* Spawny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B47DE12576E21F00F706E0 /* Spawny.swift */; };
 		24CCC2832576A6BF001A0415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CCC2822576A6BF001A0415 /* AppDelegate.swift */; };
 		24CCC2852576A6BF001A0415 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 24CCC2842576A6BF001A0415 /* GameScene.sks */; };
 		24CCC2872576A6BF001A0415 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 24CCC2862576A6BF001A0415 /* Actions.sks */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		24B47DDC2576C9EE00F706E0 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		24B47DE12576E21F00F706E0 /* Spawny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawny.swift; sourceTree = "<group>"; };
 		24CCC27F2576A6BF001A0415 /* tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CCC2822576A6BF001A0415 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24CCC2842576A6BF001A0415 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				24CCC2B82576A8A3001A0415 /* Tetromino.swift */,
 				24CCC2C32576ACBB001A0415 /* Board.swift */,
+				24B47DE12576E21F00F706E0 /* Spawny.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24CCC2892576A6BF001A0415 /* GameScene.swift in Sources */,
+				24B47DE22576E21F00F706E0 /* Spawny.swift in Sources */,
 				24CCC2C92576BC56001A0415 /* SizeHelper.swift in Sources */,
 				24CCC28B2576A6BF001A0415 /* GameViewController.swift in Sources */,
 				24CCC2C42576ACBB001A0415 /* Board.swift in Sources */,

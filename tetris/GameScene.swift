@@ -9,15 +9,17 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    private var tetroFactory: Spawny!
     
     override func didMove(to view: SKView) {
         
-        let boardSize = SizeHelper.scale(from: frame.size, edge: SizeRef.height, scale: CGFloat(0.8))
+        tetroFactory = Spawny()
         
-        let board = Board(gridSize: CGSize(width: 10, height: 18), size: boardSize)
-        board.position = CGPoint(x:frame.width * 0.1, y: frame.height * 0.1)
+        let boardSize = SizeHelper.scale(from: frame.size, edge: SizeRef.height,
+                                         scale: CGFloat(0.6))
+        
+        let board = Board(gridSize: CGSize(width: 10, height: 20), size: boardSize, fix: SizeRef.width)
+        board.position = CGPoint(x:frame.width * 0.1, y: frame.height * 0.15)
         addChild(board)
         
      }

@@ -9,18 +9,38 @@ import SpriteKit
 
 class Board: SKSpriteNode{
     
-    init(gridSize: CGSize, size: CGSize) {
-        super.init(texture:nil, color: UIColor.clear, size: size)
+    let grid: [[Int]]
+    
+    private var _blockTileSize: CGSize!
+    var blockTileSize: CGSize{
+        get{ return _blockTileSize }
+    }
+    
+    init(gridSize: CGSize, size: CGSize, fix: SizeRef?) {
+        grid = [[Int]](repeating: [Int](repeating: 0, count: Int(gridSize.width)), count: Int(gridSize.height))
+        var optSize: CGSize
+        if fix == SizeRef.width{
+            optSize = CGSize(width: size.width, height: size.width * gridSize.height / gridSize.width)
+        }else if fix == SizeRef.height{
+            optSize = CGSize(width: size.height * gridSize.width / gridSize.height, height: size.height)
+        }
+        else {
+            optSize = size
+        }
+        
+        super.init(texture:nil, color: UIColor.clear, size: optSize)
         let pathToDraw: CGMutablePath = CGMutablePath()
-        pathToDraw.addRect(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        pathToDraw.addRect(CGRect(x: 0, y: 0, width: optSize.width, height: optSize.height))
         
         let shape = SKShapeNode(path: pathToDraw)
         shape.lineWidth = CGFloat(2.0)
         addChild(shape)
         
         
-        let columWidth = size.width / gridSize.width
-        let rowHeight = size.height / gridSize.height
+        let columWidth = optSize.width / gridSize.width
+        let rowHeight = optSize.height / gridSize.height
+        
+        _blockTileSize = CGSize(width: CGFloat(columWidth), height: CGFloat(rowHeight))
         
         for i in 1..<Int(gridSize.width){
             addChild(drawLine(x: CGFloat(i) * CGFloat(columWidth), y: 0))
