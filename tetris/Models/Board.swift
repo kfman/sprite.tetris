@@ -53,7 +53,7 @@ class Board: SKSpriteNode{
     
     override func addChild(_ node: SKNode) {
         if node is Tetromino{
-            node.position = CGPoint(x: node.position.x * _blockTileSize.width, y: node.position.y * _blockTileSize.height)
+            node.position = CGPoint(x: node.position.x * _blockTileSize.width - _blockTileSize.width / 2 , y: node.position.y * _blockTileSize.height - _blockTileSize.height / 2)
         }
         super.addChild(node)
     }
