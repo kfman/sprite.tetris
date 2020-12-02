@@ -51,6 +51,13 @@ class Board: SKSpriteNode{
         }
     }
     
+    override func addChild(_ node: SKNode) {
+        if node is Tetromino{
+            node.position = CGPoint(x: node.position.x * _blockTileSize.width, y: node.position.y * _blockTileSize.height)
+        }
+        super.addChild(node)
+    }
+    
     func drawLine(x: CGFloat, y: CGFloat) -> SKShapeNode{
         let line =
             y == 0

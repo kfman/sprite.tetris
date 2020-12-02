@@ -20,7 +20,13 @@ class GameScene: SKScene {
         
         let board = Board(gridSize: CGSize(width: 10, height: 20), size: boardSize, fix: SizeRef.width)
         board.position = CGPoint(x:frame.width * 0.1, y: frame.height * 0.15)
+        board.anchorPoint = CGPoint(x:0.5, y:0.5)
+        // board.zRotation = CGFloat(Double.pi)
         addChild(board)
+        
+        let block = Tetromino(type: TetrominoType.L, size: board.blockTileSize)
+        block.position = CGPoint(x: 4, y: 4)
+        board.addChild(block)
         
      }
     
