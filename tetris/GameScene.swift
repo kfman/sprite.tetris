@@ -19,22 +19,19 @@ class GameScene: SKScene {
         let boardSize = SizeHelper.scale(from: frame.size, edge: SizeRef.height,
                                          scale: CGFloat(0.6))
         
-        let board = Board(gridSize: CGSize(width: 10, height: 20), size: boardSize, fix: SizeRef.width)
-        board.position = CGPoint(x:frame.width * 0.7, y: frame.height * 0.85)
-        board.anchorPoint = CGPoint(x:0.0, y:1.0)
-        board.zRotation = CGFloat(Double.pi)
+        let optSize = Board.getBoardSize(size: boardSize, rows: 20, columns: 10, fix: SizeRef.width)
+        
+        let board = Board(size: optSize, rows: 20, columns: 10)
+        board.position = CGPoint(x:frame.midX, y: frame.midY)
         addChild(board)
         
-        let block = Tetromino(type: TetrominoType.L, size: board.blockTileSize)
-        block.position = CGPoint(x: 4, y: 4)
-        board.addChild(block)
-        
-        let blockI = Tetromino(type: .I, size: board.blockTileSize)
-        blockI.position = CGPoint(x: 4, y: 6)
-        board.addChild(blockI)
+//        let block = Tetromino(type: TetrominoType.L, size: board.blockTileSize, gridPosition: GridPosition(x: 4, y: 4))
+//        board.addChild(block)
+//        
+//        let blockI = Tetromino(type: .I, size: board.blockTileSize, gridPosition: GridPosition(x: 4, y: 6))
+//        board.addChild(blockI)
 
-        let blockO = Tetromino(type: .O, size: board.blockTileSize)
-        blockO.position = CGPoint(x: 4, y: 8)
+        let blockO = Tetromino(type: .O, size: board.blockTileSize, gridPosition: GridPosition(x: 4, y: 2))
         board.addChild(blockO)
 
         movingBlock = blockO

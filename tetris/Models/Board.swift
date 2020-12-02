@@ -10,71 +10,95 @@ import SpriteKit
 class Board: SKSpriteNode{
     
     let grid: [[Int]]
+    let rows: Int
+    let columns: Int
     
     private var _blockTileSize: CGSize!
     var blockTileSize: CGSize{
         get{ return _blockTileSize }
     }
     
-    init(gridSize: CGSize, size: CGSize, fix: SizeRef?) {
-        grid = [[Int]](repeating: [Int](repeating: 0, count: Int(gridSize.width)), count: Int(gridSize.height))
+    static func getBoardSize(size: CGSize, rows:Int, columns:Int, fix: SizeRef?)->CGSize{
         var optSize: CGSize
         if fix == SizeRef.width{
-            optSize = CGSize(width: size.width, height: size.width * gridSize.height / gridSize.width)
+            optSize = CGSize(width: size.width, height: size.width * CGFloat(rows) / CGFloat(columns))
         }else if fix == SizeRef.height{
-            optSize = CGSize(width: size.height * gridSize.width / gridSize.height, height: size.height)
+            optSize = CGSize(width: size.height * CGFloat(columns) / CGFloat(rows), height: size.height)
         }
         else {
             optSize = size
         }
+        return optSize
+    }
+    
+    
+    init(size: CGSize, rows: Int, columns: Int) {
+        self.rows = rows
+        self.columns = columns
+        grid = [[Int]](repeating: [Int](repeating: 0, count: columns), count: rows)
         
-        super.init(texture:nil, color: UIColor.clear, size: optSize)
+        super.init(texture:nil, color: UIColor.clear, size: size)
         let pathToDraw: CGMutablePath = CGMutablePath()
-        pathToDraw.addRect(CGRect(x: 0, y: 0, width: optSize.width, height: optSize.height))
+        pathToDraw.addRect(frame)
         
         let shape = SKShapeNode(path: pathToDraw)
         shape.lineWidth = CGFloat(2.0)
         addChild(shape)
         
         
-        let columWidth = optSize.width / gridSize.width
-        let rowHeight = optSize.height / gridSize.height
+        let columnWidth = size.width / CGFloat(columns)
+        let rowHeight = size.height / CGFloat(rows)
         
-        _blockTileSize = CGSize(width: CGFloat(columWidth), height: CGFloat(rowHeight))
+        _blockTileSize = CGSize(width: CGFloat(columnWidth), height: CGFloat(rowHeight))
         
-        for i in 1..<Int(gridSize.width){
-            addChild(drawLine(x: CGFloat(i) * CGFloat(columWidth), y: 0))
+        let dummy = SKSpriteNode(texture: nil, color: UIColor.red, size: CGSize(width: 10, height: 10))
+        dummy.position = CGPoint(x: 0, y: 0)
+        addChild(dummy)
+        
+        for i in 1..<columns{
+            addChild(drawLine(x: CGFloat(i) * CGFloat(columnWidth) - size.width / 2.0, y: 0, vertical: true))
         }
         
-        for i in 1..<Int(gridSize.height){
-            addChild(drawLine(x: 0, y: CGFloat(i) * CGFloat(rowHeight)))
+        for i in 1..<rows{
+            addChild(drawLine(x: 0, y: CGFloat(i) * CGFloat(rowHeight) - size.height / 2.0, vertical: false))
         }
+
+        physicsBody = SKPhysicsBody.init(edgeLoopFrom: frame)
+        physicsBody!.restitution = 0.0
     }
     
     override func addChild(_ node: SKNode) {
-        if node is Tetromino{
-            node.position = CGPoint(x: node.position.x * _blockTileSize.width - _blockTileSize.width / 2 , y: node.position.y * _blockTileSize.height - _blockTileSize.height / 2)
+        if node is Tetromino {
+            let x = CGFloat((node as! Tetromino).gridPosition.x) * _blockTileSize.width - frame.size.width / 2.0
+            let y = frame.size.height - CGFloat((node as! Tetromino).gridPosition.y) * _blockTileSize.height - frame.size.height / 2.0
+            node.position = CGPoint(x: x, y: y)
         }
+        
         super.addChild(node)
     }
     
-    func drawLine(x: CGFloat, y: CGFloat) -> SKShapeNode{
-        let line =
-            y == 0
-            ? CGMutablePath(rect: CGRect(x: 0.0, y:0.0, width: 1.0, height: size.height), transform: nil)
-            : CGMutablePath(rect: CGRect(x: 0.0, y:0.0, width: size.width, height: 1.0), transform: nil)
+    func drawLine(x: CGFloat, y: CGFloat, vertical: Bool) -> SKShapeNode{
+        let line =            vertical
+            ? CGMutablePath(rect: CGRect(x: 0.0, y: 0.0, width: 1.0, height: size.height), transform: nil)
+            : CGMutablePath(rect: CGRect(x: 0.0, y: 0.0, width: size.width, height: 1.0), transform: nil)
         
-        if (y == 0){
-        line.addLine(to: CGPoint(x:0, y:size.height))
-        } else{
+        var pointX, pointY: CGFloat
+        if (vertical){
+            pointY = -size.height / 2.0
+            pointX = x
+            line.addLine(to: CGPoint(x:0, y:size.height))
+        } else {
+            pointY = y
+            pointX = -size.width / 2.0
             line.addLine(to: CGPoint(x:size.width, y:0))
         }
         
         let container = SKShapeNode(path: line)
-        container.lineWidth = 1.0
-        container.strokeColor = UIColor.white.withAlphaComponent(0.3)
+        container.lineWidth = 0.8
+        container.strokeColor = UIColor.white.withAlphaComponent(1.0)
         
-        container.position = CGPoint(x: x, y: y)
+        container.position = CGPoint(x: pointX ,
+                                     y: pointY )
         return container
 
     }

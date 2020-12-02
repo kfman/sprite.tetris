@@ -26,7 +26,7 @@ class Spawny{
     func createTetromino()->Tetromino{
         let next = Int.random(in: 0...6)
         
-        return Tetromino(type: Spawny.getTetromino(int: next), size: Spawny.tetrominoSize)
+        return Tetromino(type: Spawny.getTetromino(int: next), size: Spawny.tetrominoSize, gridPosition: GridPosition(x:0,y:0))
     }
     
 }
