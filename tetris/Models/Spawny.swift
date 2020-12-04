@@ -8,7 +8,14 @@
 import SpriteKit
 
 class Spawny{
-    static var tetrominoSize: CGSize!
+    let tetrominoSize: CGSize
+    let initialPosition: GridPosition
+    
+    init(tetroSize: CGSize, gridPosition: GridPosition)
+    {
+        self.initialPosition = gridPosition
+        self.tetrominoSize = tetroSize
+    }
     
     static func getTetromino(int: Int) -> TetrominoType{
         switch int {
@@ -26,7 +33,7 @@ class Spawny{
     func createTetromino()->Tetromino{
         let next = Int.random(in: 0...6)
         
-        return Tetromino(type: Spawny.getTetromino(int: next), size: Spawny.tetrominoSize, gridPosition: GridPosition(x:0,y:0))
+        return Tetromino(type: Spawny.getTetromino(int: next), tileSize: tetrominoSize, gridPosition: initialPosition)
     }
     
 }

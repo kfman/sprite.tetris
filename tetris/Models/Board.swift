@@ -64,13 +64,13 @@ class Board: SKSpriteNode{
         }
 
         physicsBody = SKPhysicsBody.init(edgeLoopFrom: frame)
-        physicsBody!.restitution = 0.0
+        physicsBody!.restitution = 1.0
     }
     
     override func addChild(_ node: SKNode) {
         if node is Tetromino {
             let x = CGFloat((node as! Tetromino).gridPosition.x) * _blockTileSize.width - frame.size.width / 2.0
-            let y = frame.size.height - CGFloat((node as! Tetromino).gridPosition.y) * _blockTileSize.height - frame.size.height / 2.0
+            let y = frame.size.height / 2.0 - CGFloat((node as! Tetromino).gridPosition.y) * _blockTileSize.height
             node.position = CGPoint(x: x, y: y)
         }
         
