@@ -26,13 +26,21 @@ class Tetromino: SKSpriteNode{
     var shape: [[Bool]]
     let type: TetrominoType
     
-    var position: GridPosition
+    var gridPosition: GridPosition
     
     init( type: TetrominoType,
-          position: GridPosition){
-        self.position = position
+          position: GridPosition,
+          size: CGSize
+    ){
+        self.gridPosition = position
         self.type = type
         self.shape = Tetromino.shapeForType(type: type)
+        
+        super.init(texture: nil, color: UIColor.green, size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     static func rotate(shape: [[Bool]], clockwise: Bool) -> [[Bool]]{

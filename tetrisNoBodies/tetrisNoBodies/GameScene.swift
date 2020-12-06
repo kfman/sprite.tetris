@@ -34,6 +34,8 @@ class GameScene: SKScene {
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
         }
+        
+        addChild(Board(rows: 15, columns: 10, gridSize: 64.0))
     }
     
     
