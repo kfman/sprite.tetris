@@ -21,7 +21,7 @@ struct GridPosition{
     }
 }
 
-class Tetromino{
+class Tetromino: SKSpriteNode{
     
     var shape: [[Bool]]
     let type: TetrominoType

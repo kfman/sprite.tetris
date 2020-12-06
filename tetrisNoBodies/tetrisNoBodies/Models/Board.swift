@@ -7,7 +7,8 @@
 
 import SpriteKit
 
-class Board{
+class Board: SKSpriteNode{
+    
     let rows: Int
     let columns: Int
     
@@ -15,11 +16,16 @@ class Board{
     var tetros: [Tetromino] = [Tetromino]()
     var movingTetro: Tetromino?
     
-    init(rows: Int, columns: Int) {
+    init(rows: Int, columns: Int, size:CGSize) {
         self.rows = rows
         self.columns = columns
         
         fields = [[Bool]](repeating: [Bool](repeating: false, count: columns), count: rows)
+        super.init(texture: nil, color: UIColor.clear, size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func update(){
@@ -36,6 +42,10 @@ extension Tetromino{
     }
     
     func canRotate(board: Board, clockwise: Bool) -> Bool{
+        return true
+    }
+    
+    func canMove(board: Board, left: Bool) -> Bool{
         return true
     }
 }
