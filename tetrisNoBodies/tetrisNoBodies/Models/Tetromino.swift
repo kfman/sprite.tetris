@@ -23,20 +23,25 @@ struct GridPosition{
 
 class Tetromino: SKSpriteNode{
     
+    static var board: Board!
+    
     var shape: [[Bool]]
     let type: TetrominoType
+    let gridSize: CGFloat
     
     var gridPosition: GridPosition
     
     init( type: TetrominoType,
           position: GridPosition,
-          size: CGSize
+          gridSize: CGFloat? = nil
     ){
         self.gridPosition = position
         self.type = type
+        self.gridSize = gridSize ?? Tetromino.board.gridSize
         self.shape = Tetromino.shapeForType(type: type)
         
-        super.init(texture: nil, color: UIColor.green, size: size)
+        super.init(texture: nil, color: UIColor.clear, size: CGSize(width: self.gridSize * 4.0, height: self.gridSize * 4.0))
+        drawSprite()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,6 +50,53 @@ class Tetromino: SKSpriteNode{
     
     static func rotate(shape: [[Bool]], clockwise: Bool) -> [[Bool]]{
         return shape
+    }
+    
+    func createSingleBlock(color: UIColor, position: CGPoint) -> SKSpriteNode{
+        let node =  SKSpriteNode(texture: nil, color: color, size: CGSize(width: gridSize, height: gridSize))
+        node.position = position
+        
+        return node
+    }
+    
+    func drawSprite(){
+        switch (type){
+        case .O:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
+        case .I:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize * 0.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize * 0.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0)))
+        case .J:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize * 0.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize * 0.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize * 0.5, y: -gridSize / 2.0)))
+        case .L:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0)))
+        case .S:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0)))
+        case .Z:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0)))
+        case .T:
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
+        }
     }
     
     static func shapeForType(type: TetrominoType) -> [[Bool]]{

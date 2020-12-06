@@ -17,12 +17,14 @@ class Board: SKSpriteNode{
     let fields: [[Bool]]
     var tetros: [Tetromino] = [Tetromino]()
     var movingTetro: Tetromino?
+    let spawny: Spawner
     
     
     init(rows: Int, columns: Int, gridSize: CGFloat) {
         self.rows = rows
         self.columns = columns
         self.gridSize = gridSize
+        self.spawny = Spawner()
         
         fields = [[Bool]](repeating: [Bool](repeating: false, count: columns), count: rows)
         super.init(texture: nil,
@@ -34,6 +36,9 @@ class Board: SKSpriteNode{
 
         let center = SKSpriteNode(texture: nil, color: UIColor.red, size: CGSize(width: 15, height: 15))
         addChild(center)
+        Tetromino.board = self
+        
+        addChild(spawny.tetrominoFactory())
     }
     
     func drawGrid(){

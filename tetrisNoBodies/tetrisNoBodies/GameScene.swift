@@ -16,7 +16,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
+        //self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
             label.alpha = 0.0
             label.run(SKAction.fadeIn(withDuration: 2.0))
@@ -35,7 +35,7 @@ class GameScene: SKScene {
                                               SKAction.removeFromParent()]))
         }
         
-        addChild(Board(rows: 15, columns: 10, gridSize: 64.0))
+        addChild(Board(rows: 16, columns: 10, gridSize: 64.0))
     }
     
     

@@ -16,6 +16,7 @@
 		24150E2E257AC02800C6985D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24150E2D257AC02800C6985D /* Assets.xcassets */; };
 		24150E38257AC04C00C6985D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24150E37257AC04C00C6985D /* Board.swift */; };
 		24150E3B257AC1DE00C6985D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24150E3A257AC1DE00C6985D /* Tetromino.swift */; };
+		248F9B0E257D695F000978FD /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F9B0D257D695F000978FD /* Spawner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		24150E2F257AC02800C6985D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24150E37257AC04C00C6985D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		24150E3A257AC1DE00C6985D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
+		248F9B0D257D695F000978FD /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				24150E37257AC04C00C6985D /* Board.swift */,
 				24150E3A257AC1DE00C6985D /* Tetromino.swift */,
+				248F9B0D257D695F000978FD /* Spawner.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				248F9B0E257D695F000978FD /* Spawner.swift in Sources */,
 				24150E27257AC02700C6985D /* GameScene.swift in Sources */,
 				24150E29257AC02700C6985D /* GameViewController.swift in Sources */,
 				24150E38257AC04C00C6985D /* Board.swift in Sources */,
