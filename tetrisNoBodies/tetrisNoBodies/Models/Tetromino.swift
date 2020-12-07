@@ -56,6 +56,10 @@ class Tetromino: SKSpriteNode{
         let node =  SKSpriteNode(texture: nil, color: color, size: CGSize(width: gridSize, height: gridSize))
         node.position = position
         
+        let frame = SKShapeNode(rect: CGRect(x: -gridSize * 0.5, y: -gridSize * 0.5, width: gridSize, height: gridSize))
+        frame.strokeColor = UIColor.black
+        frame.lineWidth = 2.5
+        node.addChild(frame)
         return node
     }
     
