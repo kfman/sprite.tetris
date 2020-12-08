@@ -17,11 +17,23 @@ extension Tetromino{
             }
             
             let blockPosition = convert(block.position, to: board)
+            let targetPosition = CGPoint(x:round(blockPosition.x), y: round(blockPosition.y + gridSize))
             
-            if (blockPosition.y) < ((board.size.height * -0.5) + gridSize * 1.5) {
-                print("Stopping: \(blockPosition.y), board bottom")
+            if blockPosition.y < (board.size.height * -0.5) + gridSize * 1.5 {
+                print("Stopping: \(round(blockPosition.y)), board bottom")
                 return false
             }
+
+            
+            for cell in board.singleBlocks{
+                let cellPosition = convert(cell.position, to: board)
+                
+                if round(cellPosition.x) == targetPosition.x && round(cellPosition.y) == targetPosition.y{
+                    print("Stopping \(targetPosition.y), block collision with cell on \(cellPosition.x):\(cellPosition.y)")
+                    return false
+                }
+            }
+            
         }
         return true
     }

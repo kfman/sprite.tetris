@@ -15,7 +15,7 @@ class Board: SKSpriteNode{
     let gridColor: UIColor = UIColor.gray
     
     let fields: [[Bool]]
-    var tetros: [Tetromino] = [Tetromino]()
+    var singleBlocks: [SingleBlock] = [SingleBlock]()
     var movingTetro: Tetromino?
     let spawny: Spawner
     
@@ -58,11 +58,15 @@ class Board: SKSpriteNode{
         movingTetro = spawny.tetrominoFactory()
         movingTetro?.position = initialPosition
         movingTetro?.gridPosition = initialGrid
-        tetros.append(movingTetro!)
         addChild(movingTetro!)
     }
     
     func fixTetro(_ tetro: Tetromino){
+        for block in tetro.children{
+            if let bl = block as? SingleBlock{
+                singleBlocks.append(bl)
+            }
+        }
         spawn()
     }
     
