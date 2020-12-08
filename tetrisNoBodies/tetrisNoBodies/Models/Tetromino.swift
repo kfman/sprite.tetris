@@ -29,13 +29,11 @@ class Tetromino: SKSpriteNode{
     let type: TetrominoType
     let gridSize: CGFloat
     
-    var gridPosition: GridPosition
+    var gridPosition: GridPosition!
     
     init( type: TetrominoType,
-          position: GridPosition,
           gridSize: CGFloat? = nil
     ){
-        self.gridPosition = position
         self.type = type
         self.gridSize = gridSize ?? Tetromino.board.gridSize
         self.shape = Tetromino.shapeForType(type: type)

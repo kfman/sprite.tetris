@@ -18,6 +18,7 @@
 		24150E3B257AC1DE00C6985D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24150E3A257AC1DE00C6985D /* Tetromino.swift */; };
 		2468C84D257F5C610000D11F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2468C84C257F5C610000D11F /* Launch Screen.storyboard */; };
 		248F9B0E257D695F000978FD /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F9B0D257D695F000978FD /* Spawner.swift */; };
+		24E49FCF257FD13000CEB014 /* TetrominoBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		24150E3A257AC1DE00C6985D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
 		2468C84C257F5C610000D11F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		248F9B0D257D695F000978FD /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
+		24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrominoBoardExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				24150E37257AC04C00C6985D /* Board.swift */,
 				24150E3A257AC1DE00C6985D /* Tetromino.swift */,
 				248F9B0D257D695F000978FD /* Spawner.swift */,
+				24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E49FCF257FD13000CEB014 /* TetrominoBoardExtension.swift in Sources */,
 				248F9B0E257D695F000978FD /* Spawner.swift in Sources */,
 				24150E27257AC02700C6985D /* GameScene.swift in Sources */,
 				24150E29257AC02700C6985D /* GameViewController.swift in Sources */,

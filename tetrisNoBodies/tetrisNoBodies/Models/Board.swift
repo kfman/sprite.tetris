@@ -19,6 +19,20 @@ class Board: SKSpriteNode{
     var movingTetro: Tetromino?
     let spawny: Spawner
     
+    var initialPosition: CGPoint{
+        get {
+            return CGPoint(
+                x: 0.0,
+                y: gridSize * CGFloat(Int(rows / 2 - 2))
+            )
+        }
+    }
+    
+    var initialGrid: GridPosition{
+        get {
+            return GridPosition(x: 0, y: rows - 2)
+        }
+    }
     
     init(rows: Int, columns: Int, gridSize: CGFloat) {
         self.rows = rows
@@ -31,14 +45,33 @@ class Board: SKSpriteNode{
                    color: UIColor.clear,
                    size: CGSize(width: gridSize * CGFloat(columns), height: gridSize * CGFloat(rows)))
         
-
+        
         drawGrid()
-
+        
         let center = SKSpriteNode(texture: nil, color: UIColor.red, size: CGSize(width: 15, height: 15))
         addChild(center)
         Tetromino.board = self
-        
-        addChild(spawny.tetrominoFactory())
+        spawn()
+    }
+    
+    func spawn(){
+        movingTetro = spawny.tetrominoFactory()
+        movingTetro?.position = initialPosition
+        movingTetro?.gridPosition = initialGrid
+        tetros.append(movingTetro!)
+        addChild(movingTetro!)
+    }
+    
+    func fixTetro(_ tetro: Tetromino){
+        spawn()
+    }
+    
+    func dropTetromino(){
+        movingTetro?.moveDown(on: self)
+    }
+    
+    func rotateTetro(){
+        movingTetro?.rotate(on: self, clockwise: true)
     }
     
     func drawGrid(){
@@ -82,16 +115,4 @@ class Board: SKSpriteNode{
     
 }
 
-extension Tetromino{
-    func canDrop(board: Board) -> Bool{
-        return true
-    }
-    
-    func canRotate(board: Board, clockwise: Bool) -> Bool{
-        return true
-    }
-    
-    func canMove(board: Board, left: Bool) -> Bool{
-        return true
-    }
-}
+
