@@ -66,8 +66,13 @@ class Board: SKSpriteNode{
         spawn()
     }
     
-    func dropTetromino(){
+    func dropTetromino() -> Bool{
+        if (movingTetro == nil) {return true}
+        if movingTetro!.hasActions(){
+            return false
+        }
         movingTetro?.moveDown(on: self)
+        return true
     }
     
     func rotateTetro(){

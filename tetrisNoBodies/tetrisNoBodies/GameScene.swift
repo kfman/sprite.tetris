@@ -24,16 +24,7 @@ class GameScene: SKScene {
     }
     
     func touchDown(atPoint pos : CGPoint) {
-        if pos.x < (frame.width * 0.25) {
-            board.movingTetro?.move(on: board, to: true)
-        } else if pos.x > (frame.width * 0.75) {
-            board.movingTetro?.move(on: board, to: false)
-        } else if (frame.midX - pos.x < 20) && (pos.y < frame.midY){
-            fastDown = true
-        } else if frame.midY < pos.y {
-            board.rotateTetro()
-        }
-    }
+     }
     
     func touchMoved(toPoint pos : CGPoint) {
         
@@ -47,7 +38,19 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        guard let pos = touches.first?.location(in: board) else {
+            return
+        }
+        
+        if pos.x < (board.size.width * -0.25) {
+            board.movingTetro?.move(on: board, to: true)
+        } else if pos.x > (board.size.width * 0.25) {
+            board.movingTetro?.move(on: board, to: false)
+        } else if abs(pos.x) < board.size.width * 0.25 && (pos.y < 0.0){
+            fastDown = true
+        } else if pos.y > 0 {
+            board.rotateTetro()
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,8 +71,10 @@ class GameScene: SKScene {
         if state == .running{
             if (lastMovement.distance(to: Date()) > moveInterval && !fastDown)
                 || (lastMovement.distance(to: Date()) > 0.1 && fastDown){
-                lastMovement = Date()
-                board.dropTetromino()
+
+                if board.dropTetromino(){
+                    lastMovement = Date()
+                }
             }
         }
         // Called before each frame is rendered

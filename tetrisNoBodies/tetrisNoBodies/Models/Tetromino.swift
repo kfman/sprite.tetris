@@ -21,6 +21,24 @@ struct GridPosition{
     }
 }
 
+class SingleBlock: SKSpriteNode{
+    init(color: UIColor, position: CGPoint, gridSize: CGFloat){
+        super.init(texture: nil, color: color, size: CGSize(width: gridSize, height: gridSize))
+        self.position = position
+        
+        let frame = SKShapeNode(rect: CGRect(x: -gridSize * 0.5, y: -gridSize * 0.5, width: gridSize, height: gridSize))
+        frame.strokeColor = UIColor.black
+        frame.lineWidth = 2.5
+        addChild(frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+}
+
 class Tetromino: SKSpriteNode{
     
     static var board: Board!
@@ -51,14 +69,7 @@ class Tetromino: SKSpriteNode{
     }
     
     func createSingleBlock(color: UIColor, position: CGPoint) -> SKSpriteNode{
-        let node =  SKSpriteNode(texture: nil, color: color, size: CGSize(width: gridSize, height: gridSize))
-        node.position = position
-        
-        let frame = SKShapeNode(rect: CGRect(x: -gridSize * 0.5, y: -gridSize * 0.5, width: gridSize, height: gridSize))
-        frame.strokeColor = UIColor.black
-        frame.lineWidth = 2.5
-        node.addChild(frame)
-        return node
+        return SingleBlock(color: color, position: position, gridSize: gridSize)
     }
     
     func drawSprite(){

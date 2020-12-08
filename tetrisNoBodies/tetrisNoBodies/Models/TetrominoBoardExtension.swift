@@ -10,17 +10,20 @@ import SpriteKit
 
 extension Tetromino{
     func canDrop(on board: Board) -> Bool{
-        var lowestTile: Int = 0
-        for i in 0..<shape.count{
-            if shape[i].contains(true){
-                lowestTile = i
+        /// Other tetro
+        for block in children{
+            if !(block is SingleBlock){
+                continue
+            }
+            
+            let blockPosition = convert(block.position, to: board)
+            
+            if (blockPosition.y) < ((board.size.height * -0.5) + gridSize * 1.5) {
+                print("Stopping: \(blockPosition.y), board bottom")
+                return false
             }
         }
-        /// Other tetro
-        // TODO: find a good idea
-        
-        ///  Board edge
-        return gridPosition.y >= lowestTile
+        return true
     }
     
     func canRotate(on board: Board, clockwise: Bool) -> Bool{
