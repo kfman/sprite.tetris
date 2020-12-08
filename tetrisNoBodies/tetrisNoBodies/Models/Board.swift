@@ -62,11 +62,7 @@ class Board: SKSpriteNode{
     }
     
     func fixTetro(_ tetro: Tetromino){
-        for block in tetro.children{
-            if let bl = block as? SingleBlock{
-                singleBlocks.append(bl)
-            }
-        }
+        movingTetro = nil
         spawn()
     }
     

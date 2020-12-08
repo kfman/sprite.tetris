@@ -17,21 +17,32 @@ extension Tetromino{
             }
             
             let blockPosition = convert(block.position, to: board)
-            let targetPosition = CGPoint(x:round(blockPosition.x), y: round(blockPosition.y + gridSize))
+            let targetPosition = CGPoint(x:round(blockPosition.x), y: round(blockPosition.y - gridSize))
             
             if blockPosition.y < (board.size.height * -0.5) + gridSize * 1.5 {
                 print("Stopping: \(round(blockPosition.y)), board bottom")
                 return false
             }
-
             
-            for cell in board.singleBlocks{
-                let cellPosition = convert(cell.position, to: board)
-                
-                if round(cellPosition.x) == targetPosition.x && round(cellPosition.y) == targetPosition.y{
-                    print("Stopping \(targetPosition.y), block collision with cell on \(cellPosition.x):\(cellPosition.y)")
-                    return false
+            
+            for child in board.children{
+                if child == board.movingTetro{
+                    continue
                 }
+                if let tetromino = child as? Tetromino{
+                    
+                    for tetChild in tetromino.children{
+                        if let cell = tetChild as? SingleBlock{
+                            let cellPosition = tetromino.convert(cell.position, to: board)
+                            
+                            if (round(cellPosition.x) == targetPosition.x) && (round(cellPosition.y) == targetPosition.y){
+                                print("Stopping block collision on \(cellPosition.x):\(cellPosition.y)")
+                                return false
+                            }
+                        }
+                    }
+                }
+                
             }
             
         }
@@ -55,7 +66,7 @@ extension Tetromino{
         
         let angle: CGFloat = CGFloat((clockwise ? Double.pi / 2.0 : Double.pi / -2.0))
         run(SKAction.rotate(byAngle: angle, duration: 0.3))
-
+        
     }
     
     func moveDown(on board: Board){
