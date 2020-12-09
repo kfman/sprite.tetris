@@ -68,6 +68,39 @@ class Board: SKSpriteNode{
     }
     
     func clearLine(){
+        var blocks = Dictionary<SingleBlock, Int>()
+        for child in children{
+            if let tetro = child as? Tetromino{
+                if tetro.children.count == 0{
+                    tetro.removeFromParent()
+                    continue
+                }
+                for tetroChild in tetro.children{
+                    if tetroChild is SingleBlock{
+                        let ypos = Int(round(tetro.convert(tetroChild.position, to: self).y))
+                        blocks[(tetroChild as! SingleBlock)] = ypos
+                    }
+                }
+            }
+        }
+        
+        for row in 0..<rows{
+            let yPosition = round(CGFloat(row) * gridSize * 0.5 - size.height * 0.5)
+            let rowBlocks = blocks.keys.filter { (block) -> Bool in
+                
+                return (CGFloat(blocks[block] ?? Int.max) == yPosition)
+            }
+            
+            if rowBlocks.count == columns{
+                rowBlocks.forEach { $0.removeFromParent()}
+                
+                /// Move blocks above down
+                let blocksAbove = blocks.keys.filter(){ CGFloat(blocks[$0] ?? Int.max) > yPosition}
+                blocksAbove.forEach(){
+                    $0.run(SKAction.move(by: CGVector(dx: 0, dy: -gridSize), duration: 0.3))
+                }
+            }
+        }
         
     }
     
