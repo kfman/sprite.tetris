@@ -34,29 +34,23 @@ extension Tetromino{
             
             
             for child in board.children{
-                if child == board.movingTetro{
-                    continue
-                }
-                if let tetromino = child as? Tetromino{
+                
+                if let cell = child as? SingleBlock{
+                    let cellPosition = cell.position
                     
-                    for tetChild in tetromino.children{
-                        if let cell = tetChild as? SingleBlock{
-                            let cellPosition = tetromino.convert(cell.position, to: board)
-                            
-                            if (round(cellPosition.x) == targetPosition.x) && (round(cellPosition.y) == targetPosition.y){
-                                print("Stopping block collision on \(cellPosition.x):\(cellPosition.y)")
-                                return false
-                            }
-                        }
+                    if (round(cellPosition.x) == targetPosition.x) && (round(cellPosition.y) == targetPosition.y){
+                        print("Stopping block collision on \(cellPosition.x):\(cellPosition.y)")
+                        return false
                     }
                 }
-                
             }
             
         }
+        
+        
         return true
     }
-
+    
     func canDrop(on board: Board) -> Bool{
         return canMove(on: board, by: CGVector(dx: 0, dy: -gridSize))
     }
@@ -71,7 +65,7 @@ extension Tetromino{
     
     func move(on board: Board, to left: Bool){
         if (canMove(on: board, left: left)){
-        run(SKAction.move(by: CGVector(dx: left ? CGFloat(-gridSize) : CGFloat(gridSize), dy: 0.0), duration: 0.15))
+            run(SKAction.move(by: CGVector(dx: left ? CGFloat(-gridSize) : CGFloat(gridSize), dy: 0.0), duration: 0.15))
         }
     }
     

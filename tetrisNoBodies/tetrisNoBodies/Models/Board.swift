@@ -62,6 +62,15 @@ class Board: SKSpriteNode{
     }
     
     func fixTetro(_ tetro: Tetromino){
+        for child in tetro.children{
+            if let block = child as? SingleBlock{
+                let position = tetro.convert(block.position, to: self)
+                block.position = position
+                block.removeFromParent()
+                addChild(block)
+            }
+        }
+        
         movingTetro = nil
         clearLine()
         spawn()
@@ -69,20 +78,15 @@ class Board: SKSpriteNode{
     
     func clearLine(){
         var blocks = Dictionary<SingleBlock, Int>()
-        for child in children{
-            if let tetro = child as? Tetromino{
-                if tetro.children.count == 0{
-                    tetro.removeFromParent()
-                    continue
-                }
-                for tetroChild in tetro.children{
-                    if tetroChild is SingleBlock{
-                        let ypos = Int(round(tetro.convert(tetroChild.position, to: self).y))
-                        blocks[(tetroChild as! SingleBlock)] = ypos
-                    }
-                }
+        for tetroChild in children{
+            
+            if tetroChild is SingleBlock{
+                let ypos = Int(round(tetroChild.position.y))
+                blocks[(tetroChild as! SingleBlock)] = ypos
             }
         }
+        
+        
         
         for row in 0..<rows{
             let yPosition = round(CGFloat(row) * gridSize * 0.5 - size.height * 0.5)
