@@ -63,7 +63,12 @@ class Board: SKSpriteNode{
     
     func fixTetro(_ tetro: Tetromino){
         movingTetro = nil
+        clearLine()
         spawn()
+    }
+    
+    func clearLine(){
+        
     }
     
     func dropTetromino() -> Bool{

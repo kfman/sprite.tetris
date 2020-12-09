@@ -9,18 +9,26 @@ import SpriteKit
 
 
 extension Tetromino{
-    func canDrop(on board: Board) -> Bool{
-        /// Other tetro
+    
+    func canMove(on board: Board, by: CGVector) -> Bool{
+        if hasActions(){
+            return false
+        }
+        
         for block in children{
             if !(block is SingleBlock){
                 continue
             }
             
             let blockPosition = convert(block.position, to: board)
-            let targetPosition = CGPoint(x:round(blockPosition.x), y: round(blockPosition.y - gridSize))
+            let targetPosition = CGPoint(x:round(blockPosition.x + by.dx) , y: round(blockPosition.y + by.dy))
             
-            if blockPosition.y < (board.size.height * -0.5) + gridSize * 1.5 {
+            if targetPosition.y < (board.size.height * -0.5) + gridSize * 0.5 {
                 print("Stopping: \(round(blockPosition.y)), board bottom")
+                return false
+            }
+            
+            if abs(targetPosition.x) > board.size.width * 0.5{
                 return false
             }
             
@@ -48,31 +56,37 @@ extension Tetromino{
         }
         return true
     }
+
+    func canDrop(on board: Board) -> Bool{
+        return canMove(on: board, by: CGVector(dx: 0, dy: -gridSize))
+    }
     
     func canRotate(on board: Board, clockwise: Bool) -> Bool{
         return true
     }
     
     func canMove(on board: Board, left: Bool) -> Bool{
-        return true
+        return canMove(on: board, by:  CGVector(dx: left ? -gridSize : gridSize, dy: 0.0))
     }
     
     func move(on board: Board, to left: Bool){
-        run(SKAction.move(by: CGVector(dx: left ? CGFloat(-gridSize) : CGFloat(gridSize), dy: 0.0), duration: 0.3))
+        if (canMove(on: board, left: left)){
+        run(SKAction.move(by: CGVector(dx: left ? CGFloat(-gridSize) : CGFloat(gridSize), dy: 0.0), duration: 0.15))
+        }
     }
     
     func rotate(on board: Board, clockwise: Bool){
         if !canRotate(on: board, clockwise: clockwise){ return }
         
         let angle: CGFloat = CGFloat((clockwise ? Double.pi / 2.0 : Double.pi / -2.0))
-        run(SKAction.rotate(byAngle: angle, duration: 0.3))
+        run(SKAction.rotate(byAngle: angle, duration: 0.15))
         
     }
     
     func moveDown(on board: Board){
         if canDrop(on: board){
             self.gridPosition = GridPosition(x: gridPosition.x, y: gridPosition.y - 1)
-            run(SKAction.move(by: CGVector(dx: 0, dy: -gridSize), duration: 0.3))
+            run(SKAction.move(by: CGVector(dx: 0, dy: -gridSize), duration: 0.15))
         }
         else{
             board.fixTetro(self)

@@ -43,7 +43,6 @@ class Tetromino: SKSpriteNode{
     
     static var board: Board!
     
-    var shape: [[Bool]]
     let type: TetrominoType
     let gridSize: CGFloat
     
@@ -54,7 +53,6 @@ class Tetromino: SKSpriteNode{
     ){
         self.type = type
         self.gridSize = gridSize ?? Tetromino.board.gridSize
-        self.shape = Tetromino.shapeForType(type: type)
         
         super.init(texture: nil, color: UIColor.clear, size: CGSize(width: self.gridSize * 4.0, height: self.gridSize * 4.0))
         drawSprite()
@@ -112,58 +110,5 @@ class Tetromino: SKSpriteNode{
         }
     }
     
-    static func shapeForType(type: TetrominoType) -> [[Bool]]{
-        
-        switch (type) {
-        case .O:
-            return [
-                [false, false, false, false],
-                [false,  true,  true, false],
-                [false,  true,  true, false],
-                [false, false, false, false]]
-            
-        case .I:
-            return [
-                [false, false, false, false],
-                [ true,  true,  true,  true],
-                [false, false, false, false],
-                [false, false, false, false]]
-            
-        case .L:
-            return [
-                [false, false, false, false],
-                [false,  true, false, false],
-                [false,  true, false, false],
-                [false,  true,  true, false]]
-            
-        case .J:
-            return [
-                [false, false, false, false],
-                [false, false,  true, false],
-                [false, false,  true, false],
-                [false,  true,  true, false]]
-            
-        case .T:
-            return [
-                [false, false, false, false],
-                [false,  true, false, false],
-                [ true,  true,  true, false],
-                [false, false, false, false]]
-            
-        case .S:
-            return [
-                [false, false, false, false],
-                [false,  true,  true, false],
-                [ true,  true, false, false],
-                [false, false, false, false]]
-            
-        case .Z:
-            return [
-                [false, false, false, false],
-                [false,  true,  true, false],
-                [false, false,  true,  true],
-                [false, false, false, false]]
-        }
-    }
     
 }
