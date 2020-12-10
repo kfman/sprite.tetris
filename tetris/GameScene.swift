@@ -28,10 +28,10 @@ class GameScene: SKScene {
         let optSize = Board.getBoardSize(size: boardSize, rows: 20, columns: 10, fix: SizeRef.width)
         
         board = Board(size: optSize, rows: 20, columns: 10)
-        board.position = CGPoint(x:frame.midX, y: frame.midY)
+        board.position = CGPoint(x:frame.size.width * 0.2, y: frame.size.height * 0.1)
         addChild(board)
 
-        tetroFactory = Spawny(tetroSize: board.blockTileSize, gridPosition: GridPosition(x: 5, y: 1))
+        tetroFactory = Spawny(tetroSize: board.blockTileSize, gridPosition: GridPosition(x: 5, y: 18))
 
 //        let block = Tetromino(type: TetrominoType.L, size: board.blockTileSize, gridPosition: GridPosition(x: 4, y: 4))
 //        board.addChild(block)
@@ -39,7 +39,7 @@ class GameScene: SKScene {
 //        let blockI = Tetromino(type: .I, size: board.blockTileSize, gridPosition: GridPosition(x: 4, y: 6))
 //        board.addChild(blockI)
 
-        let blockO = Tetromino(type: .O, tileSize: board.blockTileSize, gridPosition: GridPosition(x: 5, y: 1))
+        let blockO = Tetromino(type: .O, tileSize: board.blockTileSize, gridPosition: GridPosition(x: 5, y: 18))
         board.addChild(blockO)
 
         movingBlock = blockO

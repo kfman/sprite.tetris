@@ -1,21 +1,13 @@
 //
-//  Spawny.swift
-//  tetris
+//  Spawner.swift
+//  tetrisNoBodies
 //
-//  Created by Klaus Fischer on 01.12.20.
+//  Created by Klaus Fischer on 06.12.20.
 //
 
 import SpriteKit
 
-class Spawny{
-    let tetrominoSize: CGSize
-    let initialPosition: GridPosition
-    
-    init(tetroSize: CGSize, gridPosition: GridPosition)
-    {
-        self.initialPosition = gridPosition
-        self.tetrominoSize = tetroSize
-    }
+class Spawner{
     
     static func getTetromino(int: Int) -> TetrominoType{
         switch int {
@@ -29,11 +21,12 @@ class Spawny{
         default: return TetrominoType.I
         }
     }
+
     
-    func createTetromino()->Tetromino{
+    func tetrominoFactory() -> Tetromino{
         let next = Int.random(in: 0...6)
-        
-        return Tetromino(type: .O, tileSize: tetrominoSize, gridPosition: initialPosition)
+
+        return Tetromino(type: Spawner.getTetromino(int: next))
     }
     
 }

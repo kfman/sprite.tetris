@@ -38,6 +38,8 @@ class Board: SKSpriteNode{
         grid = [[Int]](repeating: [Int](repeating: 0, count: columns), count: rows)
         
         super.init(texture:nil, color: UIColor.clear, size: size)
+        anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        
         let pathToDraw: CGMutablePath = CGMutablePath()
         pathToDraw.addRect(frame)
         
@@ -56,11 +58,11 @@ class Board: SKSpriteNode{
         addChild(dummy)
         
         for i in 1..<columns{
-            addChild(drawLine(x: CGFloat(i) * CGFloat(columnWidth) - size.width / 2.0, y: 0, vertical: true))
+            addChild(drawLine(x: CGFloat(i) * CGFloat(columnWidth) , y: 0, vertical: true))
         }
         
         for i in 1..<rows{
-            addChild(drawLine(x: 0, y: CGFloat(i) * CGFloat(rowHeight) - size.height / 2.0, vertical: false))
+            addChild(drawLine(x: 0, y: CGFloat(i) * CGFloat(rowHeight), vertical: false))
         }
 
         physicsBody = SKPhysicsBody.init(edgeLoopFrom: frame)
@@ -69,8 +71,8 @@ class Board: SKSpriteNode{
     
     override func addChild(_ node: SKNode) {
         if node is Tetromino {
-            let x = CGFloat((node as! Tetromino).gridPosition.x) * _blockTileSize.width - frame.size.width / 2.0
-            let y = frame.size.height / 2.0 - CGFloat((node as! Tetromino).gridPosition.y) * _blockTileSize.height
+            let x = CGFloat((node as! Tetromino).gridPosition.x) * _blockTileSize.width
+            let y = CGFloat((node as! Tetromino).gridPosition.y) * _blockTileSize.height
             node.position = CGPoint(x: x, y: y)
         }
         
@@ -84,12 +86,12 @@ class Board: SKSpriteNode{
         
         var pointX, pointY: CGFloat
         if (vertical){
-            pointY = -size.height / 2.0
+            pointY = 0
             pointX = x
             line.addLine(to: CGPoint(x:0, y:size.height))
         } else {
             pointY = y
-            pointX = -size.width / 2.0
+            pointX = 0
             line.addLine(to: CGPoint(x:size.width, y:0))
         }
         

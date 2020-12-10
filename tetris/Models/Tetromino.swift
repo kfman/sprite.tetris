@@ -111,7 +111,7 @@ class Tetromino: SKSpriteNode {
                                         y: (i < 2 ? 0.0 : 1.0 * tileSize.height) - tileSize.height / 2.0)
                 addChild(tile)
             }
-            physicsBody = SKPhysicsBody(rectangleOf: frame.size)
+            physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: frame.size.width * 0.9999, height: frame.size.height * 0.9999))
 
         default:
             super.init(texture: nil, color: UIColor.clear, size: CGSize(width: tileSize.width * 4.0, height: tileSize.height))
