@@ -20,6 +20,7 @@
 		2468C84D257F5C610000D11F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2468C84C257F5C610000D11F /* Launch Screen.storyboard */; };
 		248F9B0E257D695F000978FD /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F9B0D257D695F000978FD /* Spawner.swift */; };
 		24E49FCF257FD13000CEB014 /* TetrominoBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */; };
+		24F662C92582C5E100ADC0A6 /* RussoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		2468C84C257F5C610000D11F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		248F9B0D257D695F000978FD /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
 		24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrominoBoardExtension.swift; sourceTree = "<group>"; };
+		24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RussoOne-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		24597F272582AE9600E20560 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */,
 				24597F2C2582AEC100E20560 /* lineVanish.mp3 */,
 			);
 			path = Sounds;
@@ -163,6 +166,7 @@
 			files = (
 				24150E2C257AC02700C6985D /* Main.storyboard in Resources */,
 				24150E23257AC02600C6985D /* GameScene.sks in Resources */,
+				24F662C92582C5E100ADC0A6 /* RussoOne-Regular.ttf in Resources */,
 				24150E2E257AC02800C6985D /* Assets.xcassets in Resources */,
 				2468C84D257F5C610000D11F /* Launch Screen.storyboard in Resources */,
 				24150E25257AC02700C6985D /* Actions.sks in Resources */,
