@@ -87,3 +87,14 @@ extension Tetromino{
         }
     }
 }
+
+extension CGPoint {
+    func onSameCell(other point: CGPoint, on board: Board) -> Bool{
+        let gridSize = board.gridSize
+        
+        let column = Int(round(x / gridSize))
+        let row = Int(round(y / gridSize))
+        
+        return column == Int(round(point.x / gridSize)) && row == Int(round(point.y / gridSize))
+    }
+}
