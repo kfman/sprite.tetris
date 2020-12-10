@@ -19,6 +19,8 @@ class Board: SKSpriteNode{
     var movingTetro: Tetromino?
     let spawny: Spawner
     
+    let lineCallBack: (Int) -> Void
+    
     var initialPosition: CGPoint{
         get {
             return CGPoint(
@@ -34,11 +36,12 @@ class Board: SKSpriteNode{
         }
     }
     
-    init(rows: Int, columns: Int, gridSize: CGFloat) {
+    init(rows: Int, columns: Int, gridSize: CGFloat, lineDestroyed: @escaping (Int) -> Void) {
         self.rows = rows
         self.columns = columns
         self.gridSize = gridSize
         self.spawny = Spawner()
+        self.lineCallBack = lineDestroyed
         
         fields = [[Bool]](repeating: [Bool](repeating: false, count: columns), count: rows)
         super.init(texture: nil,
@@ -71,6 +74,7 @@ class Board: SKSpriteNode{
             }
         }
         
+        tetro.removeFromParent()
         movingTetro = nil
         clearLine()
         spawn()
@@ -87,7 +91,7 @@ class Board: SKSpriteNode{
         }
         
         
-        
+        var lines: Int = 0
         for row in 0..<rows{
             let yPosition = round(CGFloat(row) * gridSize * 0.5 - size.height * 0.5)
             let rowBlocks = blocks.keys.filter { (block) -> Bool in
@@ -96,7 +100,12 @@ class Board: SKSpriteNode{
             }
             
             if rowBlocks.count == columns{
-                rowBlocks.forEach { $0.removeFromParent()}
+                lines += 1
+                rowBlocks.forEach { currentBlock in
+                    currentBlock.run(SKAction.scale(by: 0.01, duration: 0.15)){
+                        currentBlock.removeFromParent()
+                    }
+                }
                 
                 /// Move blocks above down
                 let blocksAbove = blocks.keys.filter(){ CGFloat(blocks[$0] ?? Int.max) > yPosition}
@@ -104,6 +113,10 @@ class Board: SKSpriteNode{
                     $0.run(SKAction.move(by: CGVector(dx: 0, dy: -gridSize), duration: 0.3))
                 }
             }
+        }
+        if lines > 0 {
+            lineCallBack(lines)
+            run(SKAction.playSoundFileNamed("lineVanish.mp3", waitForCompletion: false))
         }
         
     }

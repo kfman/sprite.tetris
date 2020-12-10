@@ -17,10 +17,23 @@ class GameScene: SKScene {
     private let moveInterval = TimeInterval(0.9)
     private var board: Board!
     private var fastDown: Bool = false
+    private var lineCount = 0
+    private var lineLabel: SKLabelNode!
+    
     
     override func didMove(to view: SKView) {
-        self.board = Board(rows: 16, columns: 10, gridSize: 64.0)
+        self.board = Board(rows: 16, columns: 10, gridSize: 64.0){ count in
+            self.lineCount += 1
+            self.lineLabel.text = "Line count: \(self.lineCount)"
+        }
         addChild(board)
+        
+        lineLabel = SKLabelNode(text: "Line count: \(lineCount)")
+        lineLabel.color = .white
+        lineLabel.fontSize = 36
+        lineLabel.zPosition = 1000
+        lineLabel.position = CGPoint(x: size.width * -0.2, y: size.height * 0.40)
+        addChild(lineLabel)
     }
     
     func touchDown(atPoint pos : CGPoint) {
