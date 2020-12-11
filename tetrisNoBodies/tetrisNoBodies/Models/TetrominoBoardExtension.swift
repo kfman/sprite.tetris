@@ -24,7 +24,7 @@ extension Tetromino{
             let targetPosition = CGPoint(x:round(blockPosition.x + by.dx) , y: round(blockPosition.y + by.dy))
             
             if targetPosition.y < (board.size.height * -0.5) + gridSize * 0.5 {
-                print("Stopping: \(round(blockPosition.y)), board bottom")
+                print("DEBUG: Stopping: \(round(blockPosition.y)), board bottom")
                 return false
             }
             
@@ -39,7 +39,7 @@ extension Tetromino{
                     let cellPosition = cell.position
                     
                     if (round(cellPosition.x) == targetPosition.x) && (round(cellPosition.y) == targetPosition.y){
-                        print("Stopping block collision on \(cellPosition.x):\(cellPosition.y)")
+                        print("DEBUG: Stopping block collision on \(cellPosition.x):\(cellPosition.y)")
                         return false
                     }
                 }
@@ -56,6 +56,15 @@ extension Tetromino{
     }
     
     func canRotate(on board: Board, clockwise: Bool) -> Bool{
+        print("DEBUG:vvvvvvvvvvvv ROTATION vvvvvvvvvvvv")
+        for child in children{
+            if let singleBlock = child as? SingleBlock{
+                let newX = abs(self.position.x) + abs(singleBlock.position.y)
+                print("DEBUG: newX: \(round(newX)) with block.y:\(round(singleBlock.position.y)) and self.x: \(round(self.position.x))")
+                if abs(newX) > (board.size.width * 0.5) {return false}
+            }
+        }
+        
         return true
     }
     

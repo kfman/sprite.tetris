@@ -22,8 +22,9 @@ struct GridPosition{
 }
 
 class SingleBlock: SKSpriteNode{
-    init(color: UIColor, position: CGPoint, gridSize: CGFloat){
-        super.init(texture: nil, color: color, size: CGSize(width: gridSize, height: gridSize))
+    
+    init(color: UIColor, position: CGPoint, gridSize: CGFloat, texture: SKTexture? = nil){
+        super.init(texture: texture, color: color, size: CGSize(width: gridSize, height: gridSize))
         self.position = position
         
         let frame = SKShapeNode(rect: CGRect(x: -gridSize * 0.5, y: -gridSize * 0.5, width: gridSize, height: gridSize))
@@ -55,6 +56,7 @@ class Tetromino: SKSpriteNode{
         self.gridSize = gridSize ?? Tetromino.board.gridSize
         
         super.init(texture: nil, color: UIColor.clear, size: CGSize(width: self.gridSize * 4.0, height: self.gridSize * 4.0))
+        self.zPosition = 10
         drawSprite()
     }
     
@@ -66,47 +68,48 @@ class Tetromino: SKSpriteNode{
         return shape
     }
     
-    func createSingleBlock(color: UIColor, position: CGPoint) -> SKSpriteNode{
-        return SingleBlock(color: color, position: position, gridSize: gridSize)
+    func createSingleBlock(color: UIColor, position: CGPoint, texture: SKTexture? = nil) -> SKSpriteNode{
+        return SingleBlock(color: color, position: position, gridSize: gridSize, texture: texture)
     }
+
     
     func drawSprite(){
         switch (type){
         case .O:
-            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "YellowTile"))))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "YellowTile"))))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "YellowTile"))))
+            addChild(createSingleBlock(color: UIColor.yellow, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "YellowTile"))))
         case .I:
-            addChild(createSingleBlock(color: UIColor.green, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.green, position: CGPoint(x: -gridSize * 0.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.green, position: CGPoint(x: gridSize * 0.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.green, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.clear, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "GreenTile"))))
+            addChild(createSingleBlock(color: UIColor.clear, position: CGPoint(x: -gridSize * 0.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "GreenTile"))))
+            addChild(createSingleBlock(color: UIColor.clear, position: CGPoint(x: gridSize * 0.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "GreenTile"))))
+            addChild(createSingleBlock(color: UIColor.clear, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "GreenTile"))))
         case .J:
-            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: -gridSize * 0.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: gridSize * 0.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: gridSize * 0.5, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "BlueTile"))))
+            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: -gridSize * 0.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "BlueTile"))))
+            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: gridSize * 0.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "BlueTile"))))
+            addChild(createSingleBlock(color: UIColor.blue, position: CGPoint(x: gridSize * 0.5, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "BlueTile"))))
         case .L:
-            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "CyanTile"))))
+            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "CyanTile"))))
+            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "CyanTile"))))
+            addChild(createSingleBlock(color: UIColor.red, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "CyanTile"))))
         case .S:
-            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PinkTile"))))
+            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PinkTile"))))
+            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PinkTile"))))
+            addChild(createSingleBlock(color: UIColor.orange, position: CGPoint(x: gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PinkTile"))))
         case .Z:
-            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PurpleTile"))))
+            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PurpleTile"))))
+            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PurpleTile"))))
+            addChild(createSingleBlock(color: UIColor.purple, position: CGPoint(x: gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "PurpleTile"))))
         case .T:
-            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0)))
-            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0)))
+            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: -gridSize * 1.5, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "OrangeTile"))))
+            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: -gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "OrangeTile"))))
+            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: -gridSize / 2.0, y: -gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "OrangeTile"))))
+            addChild(createSingleBlock(color: UIColor.magenta, position: CGPoint(x: gridSize / 2.0, y: gridSize / 2.0), texture: SKTexture(image: #imageLiteral(resourceName: "OrangeTile"))))
         }
     }
     

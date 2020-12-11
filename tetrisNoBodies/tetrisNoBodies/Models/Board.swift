@@ -54,9 +54,6 @@ class Board: SKSpriteNode{
         
         
         drawGrid()
-        
-        let center = SKSpriteNode(texture: nil, color: UIColor.red, size: CGSize(width: 15, height: 15))
-        addChild(center)
         Tetromino.board = self
         spawn()
     }
@@ -121,7 +118,7 @@ class Board: SKSpriteNode{
             if rowBlocks.count == columns{
                 lines += 1
                 rowBlocks.forEach { currentBlock in
-                    currentBlock.run(SKAction.scale(by: 0.01, duration: 0.15)){
+                    currentBlock.run(SKAction.scale(by: 0.01, duration: 0.5)){
                         currentBlock.removeFromParent()
                     }
                 }

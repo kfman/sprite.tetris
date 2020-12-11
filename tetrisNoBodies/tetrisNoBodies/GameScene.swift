@@ -28,10 +28,15 @@ class GameScene: SKScene {
         }, gameOver: {
             self.state = .gameOver
             let gameOverLabel = SKLabelNode()
-            gameOverLabel.fontName = "Russo One"
-            gameOverLabel.fontSize = 90
-            gameOverLabel.text = "Game Over"
-            gameOverLabel.fontColor = .red
+            gameOverLabel.attributedText = NSAttributedString(string: "Game Over", attributes: [
+                .strokeWidth: -5,
+                .font: UIFont(name: "Russo One", size: 90)!,
+                .strokeColor: UIColor.black,
+                .foregroundColor: UIColor.red
+                //NSAttributedString.Key.backgroundColor: UIColor.red,
+            ])
+            // gameOverLabel.fontColor = .red
+            gameOverLabel.zPosition = 1001
             self.addChild(gameOverLabel)
         })
         addChild(board)
