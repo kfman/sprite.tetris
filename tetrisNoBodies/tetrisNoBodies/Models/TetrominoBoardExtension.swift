@@ -46,8 +46,6 @@ extension Tetromino{
             }
             
         }
-        
-        
         return true
     }
     
