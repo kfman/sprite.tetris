@@ -144,6 +144,14 @@ extension Board {
         if abs(position.x) > self.size.width / 2 { return false }
         
         if (abs(position.y) > self.size.height / 2) { return false }
+        
+        return isCellFree(position: position)
+    }
+    
+    func isCellFree(position: CGPoint) -> Bool{
+        for child in children{
+            if (round(child.position.x) == round(position.x) && round(child.position.y) == round(position.y)) {return false}
+        }
         return true
     }
 }
