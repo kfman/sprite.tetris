@@ -59,17 +59,25 @@ class Tetromino: SKSpriteNode{
         self.zPosition = 10
         drawSprite()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     static func rotate(shape: [[Bool]], clockwise: Bool) -> [[Bool]]{
         return shape
     }
     
     func createSingleBlock(color: UIColor, position: CGPoint, texture: SKTexture? = nil) -> SKSpriteNode{
         return SingleBlock(color: color, position: position, gridSize: gridSize, texture: texture)
+    }
+
+    
+    override func copy() -> Any {
+        let result = Tetromino(type: type, gridSize: gridSize)
+        result.position = position
+        result.zRotation = zRotation
+        return result
     }
 
     

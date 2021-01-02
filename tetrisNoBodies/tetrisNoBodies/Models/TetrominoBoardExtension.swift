@@ -39,7 +39,7 @@ extension Tetromino{
                     let cellPosition = cell.position
                     
                     if (round(cellPosition.x) == targetPosition.x) && (round(cellPosition.y) == targetPosition.y){
-                        print("DEBUG: Stopping block collision on \(cellPosition.x):\(cellPosition.y)")
+                        print("DEBUG: Stopping block collision on \(round(cellPosition.x)):\(round(cellPosition.y))")
                         return false
                     }
                 }
@@ -54,6 +54,17 @@ extension Tetromino{
     }
     
     func canRotate(on board: Board, clockwise: Bool) -> Bool{
+        
+        let rotated = simulateRotation(on: board, clockwise: clockwise)
+        
+        for child in rotated{
+            let blockPosition =  convert(child, to: board)
+            if !board.isValidPosition(position: blockPosition){
+                return false
+            }
+        }
+        return true
+        
         print("DEBUG:vvvvvvvvvvvv ROTATION vvvvvvvvvvvv")
         for child in children{
             if let singleBlock = child as? SingleBlock{
@@ -76,12 +87,33 @@ extension Tetromino{
         }
     }
     
+    
+    func simulateRotation(on board: Board, clockwise: Bool) -> [CGPoint] {
+        let angle: CGFloat = CGFloat((clockwise ? Double.pi / 2.0 : Double.pi / -2.0))
+        var result = [CGPoint]()
+        for child in children{
+            let originalPosition = child.position
+            //let pivotPoint = position
+            
+            // X_new = -Y_old
+            // Y_new = -X_old
+            
+            if angle > 0 {
+                result.append(CGPoint(x: round(-originalPosition.y), y: round(originalPosition.x)))
+            }
+            else {
+                result.append(CGPoint(x: round(originalPosition.y), y: round(-originalPosition.x)))
+            }
+        }
+        return result
+    }
+    
     func rotate(on board: Board, clockwise: Bool){
         if !canRotate(on: board, clockwise: clockwise){ return }
         
         let angle: CGFloat = CGFloat((clockwise ? Double.pi / 2.0 : Double.pi / -2.0))
+        // zRotation = zRotation + angle
         run(SKAction.rotate(byAngle: angle, duration: 0.15))
-        
     }
     
     func moveDown(on board: Board){
@@ -103,5 +135,15 @@ extension CGPoint {
         let row = Int(round(y / gridSize))
         
         return column == Int(round(point.x / gridSize)) && row == Int(round(point.y / gridSize))
+    }
+}
+
+extension Board {
+    func isValidPosition(position: CGPoint) -> Bool{
+        //print("DEBUG: Rotaion collision check on: \(round(position.x)):\(round(position.y)) against board \(round(self.size.width / 2))")
+        if abs(position.x) > self.size.width / 2 { return false }
+        
+        if (abs(position.y) > self.size.height / 2) { return false }
+        return true
     }
 }

@@ -24,7 +24,7 @@ class Spawner{
 
     
     func tetrominoFactory() -> Tetromino{
-        let next = Int.random(in: 0...6)
+        let next = 0 // Int.random(in: 0...6)
 
         return Tetromino(type: Spawner.getTetromino(int: next))
     }
