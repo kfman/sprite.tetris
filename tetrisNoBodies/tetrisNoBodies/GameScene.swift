@@ -26,7 +26,7 @@ class GameScene: SKScene {
     }
     
     func startAllOver(){
-        self.board = Board(rows: 16, columns: 10, gridSize: 64.0, lineDestroyed: { count in
+        self.board = Board(rows: 24, columns: 10, gridSize: 64.0, lineDestroyed: { count in
             self.lineCount += count
             self.lineLabel.text = "Line count: \(self.lineCount)"
         }, gameOver: {
@@ -50,7 +50,7 @@ class GameScene: SKScene {
         lineLabel.fontSize = 36
         lineLabel.zPosition = 1000
         lineLabel.text = "Line count: \(self.lineCount)"
-        lineLabel.position = CGPoint(x: size.width * -0.2, y: size.height * 0.40)
+        lineLabel.position = CGPoint(x: size.width * -0.3, y: size.height * 0.45)
         addChild(lineLabel)
         lineCount = 0
         state = .idle

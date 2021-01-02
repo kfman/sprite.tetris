@@ -11,11 +11,11 @@ enum TetrominoType {
     case I, J, L, O, S, T, Z
 }
 
-struct GridPosition{
+struct GridPosition {
     let x: Int
     let y: Int
-    
-    init(x: Int, y: Int){
+
+    init(x: Int, y: Int) {
         self.x = x
         self.y = y
     }
@@ -41,7 +41,7 @@ class Tetromino: SKSpriteNode {
         self.tileSize = tileSize
         self.type = type
         self.gridPosition = gridPosition
-        
+
 
         switch type {
         case .I:
@@ -52,7 +52,7 @@ class Tetromino: SKSpriteNode {
                 addChild(tile)
             }
             physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tileSize.width * 4.0, height: tileSize.height),
-                                        center: CGPoint(x: tileSize.width * 2.0, y: tileSize.height / 2.0))
+                    center: CGPoint(x: tileSize.width * 2.0, y: tileSize.height / 2.0))
 
         case .J:
             super.init(texture: nil, color: UIColor.clear, size: CGSize(width: tileSize.width * 3.0, height: tileSize.height * 2.0))
@@ -65,12 +65,12 @@ class Tetromino: SKSpriteNode {
                 }
                 addChild(tile)
             }
-            
-            
+
+
             let shape = CGMutablePath()
-            shape.move(to: CGPoint(x:0.0, y: 0.0))
-            shape.addLine(to: CGPoint(x: tileSize.width * 3.0 , y: 0.0))
-            shape.addLine(to: CGPoint(x: tileSize.width * 3.0 , y: tileSize.height))
+            shape.move(to: CGPoint(x: 0.0, y: 0.0))
+            shape.addLine(to: CGPoint(x: tileSize.width * 3.0, y: 0.0))
+            shape.addLine(to: CGPoint(x: tileSize.width * 3.0, y: tileSize.height))
             shape.addLine(to: CGPoint(x: tileSize.width, y: tileSize.height))
             shape.addLine(to: CGPoint(x: tileSize.width, y: tileSize.height * 2.0))
             shape.addLine(to: CGPoint(x: 0.0, y: tileSize.height * 2.0))
@@ -89,10 +89,10 @@ class Tetromino: SKSpriteNode {
                 }
                 addChild(tile)
             }
-            
-            
+
+
             let shape = CGMutablePath()
-            shape.move(to: CGPoint(x:0.0, y: -tileSize.height))
+            shape.move(to: CGPoint(x: 0.0, y: -tileSize.height))
             shape.addLine(to: CGPoint(x: tileSize.width, y: -tileSize.height))
             shape.addLine(to: CGPoint(x: tileSize.width, y: 0.0))
             shape.addLine(to: CGPoint(x: tileSize.width * 3.0, y: 0.0))
@@ -108,7 +108,7 @@ class Tetromino: SKSpriteNode {
                 let tile = getTile(color: UIColor.yellow)
 
                 tile.position = CGPoint(x: (CGFloat(i % 2) * tileSize.width) - tileSize.width / 2.0,
-                                        y: (i < 2 ? 0.0 : 1.0 * tileSize.height) - tileSize.height / 2.0)
+                        y: (i < 2 ? 0.0 : 1.0 * tileSize.height) - tileSize.height / 2.0)
                 addChild(tile)
             }
             physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: frame.size.width * 0.9999, height: frame.size.height * 0.9999))
@@ -128,15 +128,16 @@ class Tetromino: SKSpriteNode {
     }
 
     var stopped = false
+
     func moveDown() -> Bool {
         let oldPosition = self.position.y
-        run(SKAction.moveBy(x: 0, y: -tileSize.height, duration: 0.2)){
-            self.stopped = (oldPosition  - self.tileSize.height / 2) < self.position.y
+        run(SKAction.moveBy(x: 0, y: -tileSize.height, duration: 0.2)) {
+            self.stopped = (oldPosition - self.tileSize.height / 2) < self.position.y
         }
-        
+
         return stopped
     }
-    
+
     func stepLeft() {
         run(SKAction.moveBy(x: -tileSize.width, y: 0.0, duration: 0.2))
     }
