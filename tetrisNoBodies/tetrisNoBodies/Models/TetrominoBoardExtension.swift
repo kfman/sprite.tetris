@@ -54,6 +54,7 @@ extension Tetromino{
     }
     
     func canRotate(on board: Board, clockwise: Bool) -> Bool{
+        if self.hasActions() {return false}
         
         let rotated = simulateRotation(on: board, clockwise: clockwise)
         
@@ -63,17 +64,6 @@ extension Tetromino{
                 return false
             }
         }
-        return true
-        
-        print("DEBUG:vvvvvvvvvvvv ROTATION vvvvvvvvvvvv")
-        for child in children{
-            if let singleBlock = child as? SingleBlock{
-                let newX = abs(self.position.x) + abs(singleBlock.position.y)
-                print("DEBUG: newX: \(round(newX)) with block.y:\(round(singleBlock.position.y)) and self.x: \(round(self.position.x))")
-                if abs(newX) > (board.size.width * 0.5) {return false}
-            }
-        }
-        
         return true
     }
     
