@@ -20,6 +20,7 @@ class Board: SKSpriteNode{
     let spawny: Spawner
     
     let lineCallBack: (Int) -> Void
+    let gameOverCallback: ()->Void
     
     var initialPosition: CGPoint{
         get {
@@ -36,12 +37,15 @@ class Board: SKSpriteNode{
         }
     }
     
-    init(rows: Int, columns: Int, gridSize: CGFloat, lineDestroyed: @escaping (Int) -> Void) {
+    init(rows: Int, columns: Int, gridSize: CGFloat,
+         lineDestroyed: @escaping (Int) -> Void,
+         gameOver: @escaping ()->Void) {
         self.rows = rows
         self.columns = columns
         self.gridSize = gridSize
         self.spawny = Spawner()
         self.lineCallBack = lineDestroyed
+        self.gameOverCallback = gameOver
         
         fields = [[Bool]](repeating: [Bool](repeating: false, count: columns), count: rows)
         super.init(texture: nil,
@@ -50,18 +54,30 @@ class Board: SKSpriteNode{
         
         
         drawGrid()
-        
-        let center = SKSpriteNode(texture: nil, color: UIColor.red, size: CGSize(width: 15, height: 15))
-        addChild(center)
         Tetromino.board = self
         spawn()
     }
     
     func spawn(){
+        if !canSpawn(){
+            gameOverCallback()
+            return
+        }
         movingTetro = spawny.tetrominoFactory()
         movingTetro?.position = initialPosition
         movingTetro?.gridPosition = initialGrid
         addChild(movingTetro!)
+    }
+    
+    func canSpawn() -> Bool{
+        for child in children{
+            if let block = child as? SingleBlock{
+                if block.position.y >= initialPosition.y{
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     func fixTetro(_ tetro: Tetromino){
@@ -102,7 +118,7 @@ class Board: SKSpriteNode{
             if rowBlocks.count == columns{
                 lines += 1
                 rowBlocks.forEach { currentBlock in
-                    currentBlock.run(SKAction.scale(by: 0.01, duration: 0.15)){
+                    currentBlock.run(SKAction.scale(by: 0.01, duration: 0.5)){
                         currentBlock.removeFromParent()
                     }
                 }

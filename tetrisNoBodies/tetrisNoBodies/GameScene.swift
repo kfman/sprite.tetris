@@ -22,18 +22,38 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView) {
-        self.board = Board(rows: 16, columns: 10, gridSize: 64.0){ count in
-            self.lineCount += 1
+        startAllOver()
+    }
+    
+    func startAllOver(){
+        self.board = Board(rows: 24, columns: 10, gridSize: 64.0, lineDestroyed: { count in
+            self.lineCount += count
             self.lineLabel.text = "Line count: \(self.lineCount)"
-        }
+        }, gameOver: {
+            self.state = .gameOver
+            let gameOverLabel = SKLabelNode()
+            gameOverLabel.attributedText = NSAttributedString(string: "Game Over", attributes: [
+                .strokeWidth: -5,
+                .font: UIFont(name: "Russo One", size: 90)!,
+                .strokeColor: UIColor.black,
+                .foregroundColor: UIColor.red
+                //NSAttributedString.Key.backgroundColor: UIColor.red,
+            ])
+            // gameOverLabel.fontColor = .red
+            gameOverLabel.zPosition = 1001
+            self.addChild(gameOverLabel)
+        })
         addChild(board)
         
-        lineLabel = SKLabelNode(text: "Line count: \(lineCount)")
+        lineLabel = SKLabelNode(fontNamed: "Russo One")
         lineLabel.color = .white
         lineLabel.fontSize = 36
         lineLabel.zPosition = 1000
-        lineLabel.position = CGPoint(x: size.width * -0.2, y: size.height * 0.40)
+        lineLabel.text = "Line count: \(self.lineCount)"
+        lineLabel.position = CGPoint(x: size.width * -0.3, y: size.height * 0.45)
         addChild(lineLabel)
+        lineCount = 0
+        state = .idle
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -47,6 +67,11 @@ class GameScene: SKScene {
         fastDown = false
         if state == .idle{
             state = .running
+        }
+        
+        if state == .gameOver{
+            removeAllChildren()
+            startAllOver()
         }
     }
     

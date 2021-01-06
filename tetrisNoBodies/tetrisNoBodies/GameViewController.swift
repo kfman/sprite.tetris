@@ -20,8 +20,8 @@ class GameViewController: UIViewController {
                 // Set the scale mode to scale to fit the window
             let scene = GameScene()
             scene.anchorPoint = CGPoint(x:0.5, y:0.5)
-            scene.size = CGSize(width: 1000, height: 1400)
-            scene.scaleMode = .aspectFill
+            scene.size = CGSize(width: 1000, height: 1800)
+            scene.scaleMode = .aspectFit
 
                 // Present the scene
                 view.presentScene(scene)
