@@ -7,9 +7,12 @@
 
 import SpriteKit
 
-class Spawner{
+class Spawner: SKSpriteNode{
     
-    static func getTetromino(int: Int) -> TetrominoType{
+    let gridColor: UIColor
+    var nextTetromino: Tetromino
+    
+    private static func getTetromino(int: Int) -> TetrominoType{
         switch int {
         case 0: return TetrominoType.I
         case 1: return TetrominoType.J
@@ -23,10 +26,32 @@ class Spawner{
     }
 
     
-    func tetrominoFactory() -> Tetromino{
-        let next = Int.random(in: 0...6)
+    init(size: CGSize, gridColor: UIColor = UIColor.gray) {
+        self.gridColor = gridColor
+        nextTetromino = Spawner.spawnTetromino()
+        super.init(texture: nil, color: UIColor.clear, size: size)
 
-        return Tetromino(type: Spawner.getTetromino(int: next))
+        addChild(nextTetromino)
+        
+        let label = SKLabelNode(text: "Next block")
+        label.position = CGPoint(x: 0, y: size.height/2 - 10)
+        addChild(label)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    static private func spawnTetromino() -> Tetromino{
+        let next = Int.random(in: 0...6)
+        return Tetromino(type: getTetromino(int: next), gridSize: 40)
+    }
+    
+    func tetrominoFactory() -> Tetromino{
+        let result = Tetromino(type: nextTetromino.type)
+        removeChildren(in: [nextTetromino])
+        nextTetromino = Spawner.spawnTetromino()
+        addChild(nextTetromino)
+        return result
+    }
 }

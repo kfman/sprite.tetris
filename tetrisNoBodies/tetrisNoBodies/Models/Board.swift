@@ -38,12 +38,13 @@ class Board: SKSpriteNode{
     }
     
     init(rows: Int, columns: Int, gridSize: CGFloat,
+         spawny: Spawner,
          lineDestroyed: @escaping (Int) -> Void,
          gameOver: @escaping ()->Void) {
         self.rows = rows
         self.columns = columns
         self.gridSize = gridSize
-        self.spawny = Spawner()
+        self.spawny = spawny
         self.lineCallBack = lineDestroyed
         self.gameOverCallback = gameOver
         
@@ -54,7 +55,7 @@ class Board: SKSpriteNode{
         
         
         drawGrid()
-        Tetromino.board = self
+        //Tetromino.board = self
         spawn()
     }
     
@@ -146,8 +147,8 @@ class Board: SKSpriteNode{
         return true
     }
     
-    func rotateTetro(){
-        movingTetro?.rotate(on: self, clockwise: true)
+    func rotateTetro(clockwise: Bool){
+        movingTetro?.rotate(on: self, clockwise: clockwise)
     }
     
     func drawGrid(){
