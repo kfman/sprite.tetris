@@ -21,6 +21,13 @@ class GameScene: SKScene {
     private var lineLabel: SKLabelNode!
     private var spawny: Spawner!
     
+    private var left: SKSpriteNode!
+    private var right: SKSpriteNode!
+    private var down: SKSpriteNode!
+    
+    private var rotateLeft: SKSpriteNode!
+    private var rotateRight: SKSpriteNode!
+
     
     override func didMove(to view: SKView) {
         startAllOver()
@@ -62,6 +69,38 @@ class GameScene: SKScene {
         addChild(lineLabel)
         lineCount = 0
         state = .idle
+        
+        left = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "left")) , size: CGSize(width: 192, height: 192))
+        left.position = CGPoint(x: -328, y: -800)
+        left.zPosition = 11
+        left.name = "Move Left"
+        addChild(left)
+        
+        right = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "right")) , size: CGSize(width: 192, height: 192))
+        right.position = CGPoint(x: 328, y: -800)
+        right.zPosition = 11
+        right.name = "Move Right"
+        addChild(right)
+        
+        down = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "down")) , size: CGSize(width: 192, height: 192))
+        down.position = CGPoint(x: 0, y: -800)
+        down.zPosition = 11
+        down.name = "Fast Down"
+        addChild(down)
+     
+        
+        rotateLeft = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "rotateLeft")) , size: CGSize(width: 192, height: 192))
+        rotateLeft.position = CGPoint(x: 350, y: -500)
+        rotateLeft.zPosition = 11
+        rotateLeft.name = "Rotate Left"
+        addChild(rotateLeft)
+        
+        rotateRight = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "rotateRight")) , size: CGSize(width: 192, height: 192))
+        rotateRight.position = CGPoint(x: 350, y: -200)
+        rotateRight.zPosition = 11
+        rotateRight.name = "Rotate Right"
+        addChild(rotateRight)
+
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -84,18 +123,27 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let pos = touches.first?.location(in: board) else {
+        guard let pos = touches.first?.location(in: self) else {
             return
         }
         
-        if pos.x < (board.size.width * -0.25) {
+        let node = self.atPoint(pos)
+        
+        print(node.name ?? "No name")
+        
+        if node == left{
             board.movingTetro?.move(on: board, to: true)
-        } else if pos.x > (board.size.width * 0.25) {
+        } else if node == right {
             board.movingTetro?.move(on: board, to: false)
-        } else if abs(pos.x) < board.size.width * 0.25 && (pos.y < 0.0){
+        }
+        else if node == down {
             fastDown = true
-        } else if pos.y > 0 {
-            board.rotateTetro()
+        }
+        
+        else if node == rotateLeft {
+            board.rotateTetro(clockwise: true)
+        }        else if node == rotateRight {
+            board.rotateTetro(clockwise: false)
         }
     }
     

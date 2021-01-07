@@ -147,8 +147,8 @@ class Board: SKSpriteNode{
         return true
     }
     
-    func rotateTetro(){
-        movingTetro?.rotate(on: self, clockwise: true)
+    func rotateTetro(clockwise: Bool){
+        movingTetro?.rotate(on: self, clockwise: clockwise)
     }
     
     func drawGrid(){
