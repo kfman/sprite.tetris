@@ -41,9 +41,6 @@ class SingleBlock: SKSpriteNode{
 }
 
 class Tetromino: SKSpriteNode{
-    
-    static var board: Board!
-    
     let type: TetrominoType
     let gridSize: CGFloat
     
@@ -53,7 +50,7 @@ class Tetromino: SKSpriteNode{
           gridSize: CGFloat? = nil
     ){
         self.type = type
-        self.gridSize = gridSize ?? Tetromino.board.gridSize
+        self.gridSize = gridSize ?? 64
         
         super.init(texture: nil, color: UIColor.clear, size: CGSize(width: self.gridSize * 4.0, height: self.gridSize * 4.0))
         self.zPosition = 10

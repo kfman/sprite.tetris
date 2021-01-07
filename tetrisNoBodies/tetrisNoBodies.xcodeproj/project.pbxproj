@@ -19,6 +19,7 @@
 		24597F2D2582AEC100E20560 /* lineVanish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 24597F2C2582AEC100E20560 /* lineVanish.mp3 */; };
 		2468C84D257F5C610000D11F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2468C84C257F5C610000D11F /* Launch Screen.storyboard */; };
 		248F9B0E257D695F000978FD /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F9B0D257D695F000978FD /* Spawner.swift */; };
+		24C6F58A25A789AF00A48685 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C6F58925A789AF00A48685 /* Button.swift */; };
 		24E49FCF257FD13000CEB014 /* TetrominoBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */; };
 		24F662C92582C5E100ADC0A6 /* RussoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		24597F2C2582AEC100E20560 /* lineVanish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lineVanish.mp3; sourceTree = "<group>"; };
 		2468C84C257F5C610000D11F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		248F9B0D257D695F000978FD /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
+		24C6F58925A789AF00A48685 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrominoBoardExtension.swift; sourceTree = "<group>"; };
 		24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RussoOne-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				24150E3A257AC1DE00C6985D /* Tetromino.swift */,
 				248F9B0D257D695F000978FD /* Spawner.swift */,
 				24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */,
+				24C6F58925A789AF00A48685 /* Button.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				24E49FCF257FD13000CEB014 /* TetrominoBoardExtension.swift in Sources */,
 				248F9B0E257D695F000978FD /* Spawner.swift in Sources */,
 				24150E27257AC02700C6985D /* GameScene.swift in Sources */,
+				24C6F58A25A789AF00A48685 /* Button.swift in Sources */,
 				24150E29257AC02700C6985D /* GameViewController.swift in Sources */,
 				24150E38257AC04C00C6985D /* Board.swift in Sources */,
 				24150E21257AC02600C6985D /* AppDelegate.swift in Sources */,

@@ -19,6 +19,7 @@ class GameScene: SKScene {
     private var fastDown: Bool = false
     private var lineCount = 0
     private var lineLabel: SKLabelNode!
+    private var spawny: Spawner!
     
     
     override func didMove(to view: SKView) {
@@ -26,7 +27,12 @@ class GameScene: SKScene {
     }
     
     func startAllOver(){
-        self.board = Board(rows: 24, columns: 10, gridSize: 64.0, lineDestroyed: { count in
+        spawny = Spawner(size: CGSize(width: 200, height: 200))
+        spawny.position = CGPoint(x: 320, y: 550)
+        spawny.zPosition = 10
+        self.board = Board(rows: 24, columns: 10, gridSize: 64.0,
+                           spawny: spawny,
+                           lineDestroyed: { count in
             self.lineCount += count
             self.lineLabel.text = "Line count: \(self.lineCount)"
         }, gameOver: {
@@ -44,13 +50,15 @@ class GameScene: SKScene {
             self.addChild(gameOverLabel)
         })
         addChild(board)
+        addChild(spawny)
+        board.position = CGPoint(x: -128, y: 82)
         
         lineLabel = SKLabelNode(fontNamed: "Russo One")
         lineLabel.color = .white
         lineLabel.fontSize = 36
         lineLabel.zPosition = 1000
         lineLabel.text = "Line count: \(self.lineCount)"
-        lineLabel.position = CGPoint(x: size.width * -0.3, y: size.height * 0.45)
+        lineLabel.position = CGPoint(x: size.width * -0.37, y: size.height * 0.48)
         addChild(lineLabel)
         lineCount = 0
         state = .idle
