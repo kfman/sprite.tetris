@@ -51,6 +51,7 @@ class Spawner: SKSpriteNode{
         let result = Tetromino(type: nextTetromino.type)
         removeChildren(in: [nextTetromino])
         nextTetromino = Spawner.spawnTetromino()
+        nextTetromino.zPosition = 0
         addChild(nextTetromino)
         return result
     }

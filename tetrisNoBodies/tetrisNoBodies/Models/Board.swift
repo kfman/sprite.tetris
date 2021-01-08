@@ -133,7 +133,10 @@ class Board: SKSpriteNode{
         }
         if lines > 0 {
             lineCallBack(lines)
-            run(SKAction.playSoundFileNamed("lineVanish.mp3", waitForCompletion: false))
+            if lines == 4
+            {run(SKAction.playSoundFileNamed("tetris.wav", waitForCompletion: false))}
+            else
+            {run(SKAction.playSoundFileNamed("lineVanish.mp3", waitForCompletion: false))}
         }
         
     }

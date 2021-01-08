@@ -27,6 +27,9 @@ class GameScene: SKScene {
     
     private var rotateLeft: SKSpriteNode!
     private var rotateRight: SKSpriteNode!
+    
+    private var pauseButton: SKSpriteNode!
+    private var pausedScreen: SKSpriteNode!
 
     
     override func didMove(to view: SKView) {
@@ -37,6 +40,7 @@ class GameScene: SKScene {
         spawny = Spawner(size: CGSize(width: 200, height: 200))
         spawny.position = CGPoint(x: 320, y: 550)
         spawny.zPosition = 10
+        
         self.board = Board(rows: 24, columns: 10, gridSize: 64.0,
                            spawny: spawny,
                            lineDestroyed: { count in
@@ -53,7 +57,7 @@ class GameScene: SKScene {
                 //NSAttributedString.Key.backgroundColor: UIColor.red,
             ])
             // gameOverLabel.fontColor = .red
-            gameOverLabel.zPosition = 1001
+            gameOverLabel.zPosition = 15
             self.addChild(gameOverLabel)
         })
         addChild(board)
@@ -63,7 +67,7 @@ class GameScene: SKScene {
         lineLabel = SKLabelNode(fontNamed: "Russo One")
         lineLabel.color = .white
         lineLabel.fontSize = 36
-        lineLabel.zPosition = 1000
+        lineLabel.zPosition = 10
         lineLabel.text = "Line count: \(self.lineCount)"
         lineLabel.position = CGPoint(x: size.width * -0.37, y: size.height * 0.48)
         addChild(lineLabel)
@@ -100,6 +104,12 @@ class GameScene: SKScene {
         rotateRight.zPosition = 11
         rotateRight.name = "Rotate Right"
         addChild(rotateRight)
+        
+        pauseButton = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "pause")) , size: CGSize(width: 192, height: 192))
+        pauseButton.position = CGPoint(x: 350, y: 200)
+        pauseButton.zPosition = 11
+        pauseButton.name = "Pause"
+        addChild(pauseButton)
 
     }
     
@@ -139,11 +149,21 @@ class GameScene: SKScene {
         else if node == down {
             fastDown = true
         }
-        
         else if node == rotateLeft {
             board.rotateTetro(clockwise: true)
-        }        else if node == rotateRight {
+        }
+        else if node == rotateRight {
             board.rotateTetro(clockwise: false)
+        }
+        else if node == pauseButton{
+            isPaused = true
+            pausedScreen = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "Paused Screen")), color: UIColor.clear, size: CGSize(width: 1200, height: 1800))
+            pausedScreen.position = CGPoint(x:0, y:0)
+            pausedScreen.zPosition = 12
+            addChild(pausedScreen)
+        } else if node == pausedScreen {
+            isPaused = false
+            removeChildren(in: [pausedScreen])
         }
     }
     

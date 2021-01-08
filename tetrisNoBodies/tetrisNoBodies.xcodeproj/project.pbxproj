@@ -16,6 +16,7 @@
 		24150E2E257AC02800C6985D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24150E2D257AC02800C6985D /* Assets.xcassets */; };
 		24150E38257AC04C00C6985D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24150E37257AC04C00C6985D /* Board.swift */; };
 		24150E3B257AC1DE00C6985D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24150E3A257AC1DE00C6985D /* Tetromino.swift */; };
+		2436BAA525A8FE5700F2A5A5 /* tetris.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2436BAA425A8FE5700F2A5A5 /* tetris.wav */; };
 		24597F2D2582AEC100E20560 /* lineVanish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 24597F2C2582AEC100E20560 /* lineVanish.mp3 */; };
 		2468C84D257F5C610000D11F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2468C84C257F5C610000D11F /* Launch Screen.storyboard */; };
 		248F9B0E257D695F000978FD /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F9B0D257D695F000978FD /* Spawner.swift */; };
@@ -35,6 +36,7 @@
 		24150E2F257AC02800C6985D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24150E37257AC04C00C6985D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		24150E3A257AC1DE00C6985D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
+		2436BAA425A8FE5700F2A5A5 /* tetris.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tetris.wav; sourceTree = "<group>"; };
 		24597F2C2582AEC100E20560 /* lineVanish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lineVanish.mp3; sourceTree = "<group>"; };
 		2468C84C257F5C610000D11F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		248F9B0D257D695F000978FD /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		24597F272582AE9600E20560 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				2436BAA425A8FE5700F2A5A5 /* tetris.wav */,
 				24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */,
 				24597F2C2582AEC100E20560 /* lineVanish.mp3 */,
 			);
@@ -170,6 +173,7 @@
 				24150E2E257AC02800C6985D /* Assets.xcassets in Resources */,
 				2468C84D257F5C610000D11F /* Launch Screen.storyboard in Resources */,
 				24150E25257AC02700C6985D /* Actions.sks in Resources */,
+				2436BAA525A8FE5700F2A5A5 /* tetris.wav in Resources */,
 				24597F2D2582AEC100E20560 /* lineVanish.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
