@@ -19,6 +19,7 @@ class GameScene: SKScene {
     private var fastDown: Bool = false
     private var lineCount = 0
     private var lineLabel: SKLabelNode!
+    private var highScoreLabel: SKLabelNode!
     private var spawny: Spawner!
     
     private var left: SKSpriteNode!
@@ -59,6 +60,8 @@ class GameScene: SKScene {
             // gameOverLabel.fontColor = .red
             gameOverLabel.zPosition = 15
             self.addChild(gameOverLabel)
+            if UserDefaults.standard.integer(forKey: "HighScore") < self.lineCount
+            {UserDefaults.standard.setValue(self.lineCount, forKey: "HighScore")}
         })
         addChild(board)
         addChild(spawny)
@@ -73,6 +76,16 @@ class GameScene: SKScene {
         addChild(lineLabel)
         lineCount = 0
         state = .idle
+
+        highScoreLabel = SKLabelNode(fontNamed: "Russo One")
+        highScoreLabel.color = .white
+        highScoreLabel.fontSize = 36
+        highScoreLabel.zPosition = 10
+        let highScore = UserDefaults.standard.value(forKey: "HighScore") ?? 0
+        highScoreLabel.text = "High Score: \(highScore)"
+        highScoreLabel.position = CGPoint(x: size.width * 0.3, y: size.height * 0.48)
+        addChild(highScoreLabel)
+
         
         left = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "left")) , size: CGSize(width: 192, height: 192))
         left.position = CGPoint(x: -328, y: -800)
