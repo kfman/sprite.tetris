@@ -22,6 +22,7 @@
 		248F9B0E257D695F000978FD /* Spawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F9B0D257D695F000978FD /* Spawner.swift */; };
 		24E49FCF257FD13000CEB014 /* TetrominoBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */; };
 		24F662C92582C5E100ADC0A6 /* RussoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */; };
+		38895FDBF2E454829A7191B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38895F059FB43A63048851A1 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		248F9B0D257D695F000978FD /* Spawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawner.swift; sourceTree = "<group>"; };
 		24E49FCE257FD13000CEB014 /* TetrominoBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrominoBoardExtension.swift; sourceTree = "<group>"; };
 		24F662C72582C37B00ADC0A6 /* RussoOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RussoOne-Regular.ttf"; sourceTree = "<group>"; };
+		38895F059FB43A63048851A1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				24150E2A257AC02700C6985D /* Main.storyboard */,
 				24150E2D257AC02800C6985D /* Assets.xcassets */,
 				24150E2F257AC02800C6985D /* Info.plist */,
+				38895F059FB43A63048851A1 /* Constants.swift */,
 			);
 			path = tetrisNoBodies;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				24150E38257AC04C00C6985D /* Board.swift in Sources */,
 				24150E21257AC02600C6985D /* AppDelegate.swift in Sources */,
 				24150E3B257AC1DE00C6985D /* Tetromino.swift in Sources */,
+				38895FDBF2E454829A7191B9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
