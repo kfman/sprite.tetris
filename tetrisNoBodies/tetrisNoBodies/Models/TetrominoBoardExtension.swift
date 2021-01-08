@@ -73,7 +73,7 @@ extension Tetromino{
     
     func move(on board: Board, to left: Bool){
         if (canMove(on: board, left: left)){
-            run(SKAction.move(by: CGVector(dx: left ? CGFloat(-gridSize) : CGFloat(gridSize), dy: 0.0), duration: 0.15))
+            run(SKAction.move(by: CGVector(dx: left ? CGFloat(-gridSize) : CGFloat(gridSize), dy: 0.0), duration: motionSpeed))
         }
     }
     
@@ -103,13 +103,13 @@ extension Tetromino{
         
         let angle: CGFloat = CGFloat((clockwise ? Double.pi / 2.0 : Double.pi / -2.0))
         // zRotation = zRotation + angle
-        run(SKAction.rotate(byAngle: angle, duration: 0.15))
+        run(SKAction.rotate(byAngle: angle, duration: motionSpeed))
     }
     
     func moveDown(on board: Board){
         if canDrop(on: board){
             self.gridPosition = GridPosition(x: gridPosition.x, y: gridPosition.y - 1)
-            run(SKAction.move(by: CGVector(dx: 0, dy: -gridSize), duration: 0.15))
+            run(SKAction.move(by: CGVector(dx: 0, dy: -gridSize), duration: motionSpeed))
         }
         else{
             board.fixTetro(self)

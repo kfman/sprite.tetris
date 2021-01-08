@@ -45,6 +45,7 @@ class Tetromino: SKSpriteNode{
     let gridSize: CGFloat
     
     var gridPosition: GridPosition!
+    let motionSpeed: TimeInterval = 0.075
     
     init( type: TetrominoType,
           gridSize: CGFloat? = nil
